@@ -7,13 +7,10 @@ const ProgressBar = ({ currentPage, totalPages }: ProgressBarProps) => {
   const progress = (currentPage / totalPages) * 100;
 
   return (
-    <div className="w-full px-4 py-3">
-      <div className="flex items-center justify-between mb-2">
+    <div className="sticky top-0 z-50 w-full px-4 py-3 bg-background/90 backdrop-blur-md border-b border-border/30">
+      <div className="flex items-center justify-center mb-2">
         <span className="text-sm font-body text-muted-foreground">
-          Page {currentPage} of {totalPages}
-        </span>
-        <span className="text-sm font-body text-muted-foreground">
-          {Math.round(progress)}%
+          {currentPage} of {totalPages}
         </span>
       </div>
       <div className="w-full h-1.5 rounded-full bg-muted overflow-hidden">
