@@ -21,7 +21,7 @@ const ResultsPage = ({ results, firstName, onRetake, resultId }: ResultsPageProp
   const top2 = archetypes[topTwoNames[1]];
 
   const resultsUrl = resultId ? `${window.location.origin}/results/${resultId}` : window.location.origin;
-  const shareText = `I'm ${top1.title} ${top1.emoji} + ${top2.title} ${top2.emoji} — discover your Courage Archetype at`;
+  const shareText = `I'm ${top1.title} ${top1.emoji} + ${top2.title} ${top2.emoji} — discover your Courage Archetypes at`;
 
   const handleCopy = () => {
     navigator.clipboard.writeText(`${shareText} ${resultsUrl}`);
@@ -54,69 +54,73 @@ const ResultsPage = ({ results, firstName, onRetake, resultId }: ResultsPageProp
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, 1080, 1920);
 
-    // Subtle decorative line
-    ctx.strokeStyle = "rgba(212, 168, 83, 0.3)";
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(340, 280);
-    ctx.lineTo(740, 280);
-    ctx.stroke();
+    // Subtle gold border inset
+    ctx.strokeStyle = "rgba(212, 168, 83, 0.25)";
+    ctx.lineWidth = 2;
+    ctx.strokeRect(40, 40, 1000, 1840);
 
     // Header
     ctx.fillStyle = "#D4A853";
-    ctx.font = "bold 52px Georgia, serif";
+    ctx.font = "bold 62px Georgia, serif";
     ctx.textAlign = "center";
-    ctx.fillText("My Courage Archetype", 540, 240);
+    ctx.fillText("My Courage Archetypes", 540, 300);
+
+    // Decorative line under header
+    ctx.strokeStyle = "rgba(212, 168, 83, 0.4)";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(300, 340);
+    ctx.lineTo(780, 340);
+    ctx.stroke();
 
     // Primary archetype
-    ctx.fillStyle = "#FFF8F0";
-    ctx.font = "bold 84px Georgia, serif";
-    ctx.fillText(`${top1.title} ${top1.emoji}`, 540, 520);
     ctx.fillStyle = "#D4A853";
-    ctx.font = "italic 40px Georgia, serif";
-    ctx.fillText(`"${top1.tagline}"`, 540, 600);
+    ctx.font = "bold 88px Georgia, serif";
+    ctx.fillText(`${top1.title} ${top1.emoji}`, 540, 560);
+    ctx.fillStyle = "#FFF8F0";
+    ctx.font = "italic 42px Georgia, serif";
+    ctx.fillText(`"${top1.tagline}"`, 540, 640);
 
-    // Gold line separator
+    // Gold line separator between archetypes
     ctx.strokeStyle = "rgba(212, 168, 83, 0.5)";
     ctx.lineWidth = 2;
     ctx.beginPath();
-    ctx.moveTo(340, 710);
-    ctx.lineTo(740, 710);
+    ctx.moveTo(340, 760);
+    ctx.lineTo(740, 760);
     ctx.stroke();
-    ctx.lineWidth = 1;
 
     // Secondary archetype
-    ctx.fillStyle = "#FFF8F0";
-    ctx.font = "bold 72px Georgia, serif";
-    ctx.fillText(`${top2.title} ${top2.emoji}`, 540, 850);
     ctx.fillStyle = "#D4A853";
-    ctx.font = "italic 36px Georgia, serif";
-    ctx.fillText(`"${top2.tagline}"`, 540, 920);
+    ctx.font = "bold 76px Georgia, serif";
+    ctx.fillText(`${top2.title} ${top2.emoji}`, 540, 920);
+    ctx.fillStyle = "#FFF8F0";
+    ctx.font = "italic 38px Georgia, serif";
+    ctx.fillText(`"${top2.tagline}"`, 540, 995);
 
     // Decorative line
     ctx.strokeStyle = "rgba(212, 168, 83, 0.3)";
+    ctx.lineWidth = 1;
     ctx.beginPath();
-    ctx.moveTo(340, 1080);
-    ctx.lineTo(740, 1080);
+    ctx.moveTo(340, 1120);
+    ctx.lineTo(740, 1120);
     ctx.stroke();
 
     // Bottom CTA
     ctx.fillStyle = "rgba(255, 248, 240, 0.6)";
     ctx.font = "28px sans-serif";
-    ctx.fillText("Discover yours at", 540, 1200);
+    ctx.fillText("Discover yours at", 540, 1260);
     ctx.fillStyle = "#D4A853";
-    ctx.font = "bold 32px sans-serif";
-    ctx.fillText("couragequizbeta1.lovable.app", 540, 1250);
+    ctx.font = "bold 34px sans-serif";
+    ctx.fillText("couragequizbeta1.lovable.app", 540, 1310);
 
     // Copyright
     ctx.fillStyle = "rgba(255, 248, 240, 0.3)";
     ctx.font = "22px sans-serif";
     ctx.fillText("© 2026 Shatter The Norm LLC", 540, 1820);
 
-    // Generate image URL for inline display
     const dataUrl = canvas.toDataURL("image/png");
     setShareImageUrl(dataUrl);
-  }, [top1, top2, resultsUrl]);
+  }, [top1, top2]);
 
   useEffect(() => {
     renderShareCard();
@@ -126,11 +130,20 @@ const ResultsPage = ({ results, firstName, onRetake, resultId }: ResultsPageProp
     if (!shareImageUrl) return;
     const a = document.createElement("a");
     a.href = shareImageUrl;
-    a.download = "my-courage-archetype.png";
+    a.download = "my-courage-archetypes.png";
     a.click();
   };
 
-  const maxScore = Math.max(...results.sorted.map(([, score]) => score));
+  // Relative bar scaling: min score maps to 20%, max to 100%
+  const scores = results.sorted.map(([, s]) => s);
+  const minScore = Math.min(...scores);
+  const maxScore = Math.max(...scores);
+  const scoreRange = maxScore - minScore;
+
+  const getBarWidth = (score: number) => {
+    if (scoreRange === 0) return 100;
+    return 20 + ((score - minScore) / scoreRange) * 80;
+  };
 
   return (
     <div className="min-h-screen px-4 sm:px-6 py-10 max-w-2xl mx-auto animate-fade-in-up">
@@ -139,7 +152,7 @@ const ResultsPage = ({ results, firstName, onRetake, resultId }: ResultsPageProp
       {/* Header */}
       <div className="text-center mb-10">
         <p className="text-primary font-body font-medium text-sm uppercase tracking-widest mb-3">
-          {firstName}'s Courage Archetype
+          {firstName}'s Courage Archetypes
         </p>
         <h1 className="text-3xl sm:text-4xl font-heading font-bold mb-2">
           Your Two Strongest Courage Types
@@ -185,7 +198,7 @@ const ResultsPage = ({ results, firstName, onRetake, resultId }: ResultsPageProp
           {results.sorted.map(([category, score], i) => {
             const arch = archetypes[category];
             const isTopTwo = topTwoNames.includes(category);
-            const barWidth = (score / maxScore) * 100;
+            const barWidth = getBarWidth(score);
             const isExpanded = expandedCategory === category;
 
             return (
@@ -204,16 +217,21 @@ const ResultsPage = ({ results, firstName, onRetake, resultId }: ResultsPageProp
                   <p className="font-heading italic text-xs text-muted-foreground mb-1.5">
                     "{arch.tagline}"
                   </p>
-                  <div className="w-full h-3 rounded-full bg-muted overflow-hidden">
-                    <div
-                      className={`h-full rounded-full animate-bar-grow`}
-                      style={{
-                        width: `${barWidth}%`,
-                        backgroundColor: isTopTwo ? "#D4A853" : "#1A6B5C",
-                        animationDelay: `${i * 100 + 300}ms`,
-                        animationFillMode: "forwards",
-                      }}
-                    />
+                  <div className="flex items-center gap-2">
+                    <div className="flex-1 h-3 rounded-full bg-muted overflow-hidden">
+                      <div
+                        className="h-full rounded-full animate-bar-grow"
+                        style={{
+                          width: `${barWidth}%`,
+                          backgroundColor: isTopTwo ? "#D4A853" : "#1A6B5C",
+                          animationDelay: `${i * 100 + 300}ms`,
+                          animationFillMode: "forwards",
+                        }}
+                      />
+                    </div>
+                    <span className="text-xs font-body text-muted-foreground tabular-nums w-6 text-right">
+                      {score}
+                    </span>
                   </div>
                 </button>
 
@@ -230,21 +248,23 @@ const ResultsPage = ({ results, firstName, onRetake, resultId }: ResultsPageProp
         </div>
       </div>
 
-      {/* Divider + Share Section */}
-      <div className="mt-16 mb-10">
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent mb-8" />
-        <h3 className="text-2xl sm:text-3xl font-heading font-bold text-center mb-8">
+      {/* ── Share Section ── */}
+      <div className="mt-20 mb-10">
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent mb-10" />
+        <h3 className="text-2xl sm:text-3xl font-heading font-bold text-center mb-10">
           Share Your Results
         </h3>
 
-        {/* Share Card */}
+        {/* Share Card Preview */}
         {shareImageUrl && (
           <div className="flex justify-center mb-3">
-            <img
-              src={shareImageUrl}
-              alt={`My Courage Archetype: ${top1.title} + ${top2.title}`}
-              className="w-full max-w-sm rounded-2xl shadow-[0_8px_32px_rgba(212,168,83,0.15)] border border-primary/30"
-            />
+            <div className="rounded-2xl border-2 border-primary/40 shadow-[0_12px_40px_rgba(212,168,83,0.18)] overflow-hidden">
+              <img
+                src={shareImageUrl}
+                alt={`My Courage Archetypes: ${top1.title} + ${top2.title}`}
+                className="w-full max-w-sm"
+              />
+            </div>
           </div>
         )}
         <p className="text-center text-xs text-muted-foreground/60 font-body mb-6">
