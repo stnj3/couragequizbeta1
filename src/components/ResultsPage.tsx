@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback, useEffect } from "react";
-import { Instagram, Linkedin, Copy, Download } from "lucide-react";
+import { Linkedin, Copy, Download, Share2 } from "lucide-react";
 import { archetypes } from "@/data/archetypes";
 import { useToast } from "@/hooks/use-toast";
 import type { ScoreResult } from "@/lib/scoring";
@@ -31,10 +31,16 @@ const ResultsPage = ({ results, firstName, onRetake, resultId }: ResultsPageProp
   const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(resultsUrl)}`;
   const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(resultsUrl)}`;
 
-  const handleInstagramShare = () => {
-    navigator.clipboard.writeText(`${shareText} ${resultsUrl}`);
-    toast({ title: "Text copied!", description: "Paste it in your Instagram story or post." });
-    setTimeout(() => { window.open("https://www.instagram.com/", "_blank"); }, 500);
+  const handleNativeShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: "My Courage Archetypes", text: shareText, url: resultsUrl });
+      } catch (e) {
+        // User cancelled — no action needed
+      }
+    } else {
+      window.open(linkedinUrl, "_blank", "noopener,noreferrer");
+    }
   };
 
   const renderShareCard = useCallback(() => {
@@ -290,19 +296,11 @@ const ResultsPage = ({ results, firstName, onRetake, resultId }: ResultsPageProp
           >
             𝕏 Share on X
           </a>
-          <a
-            href={linkedinUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-muted text-foreground font-body text-sm px-5 py-2.5 hover:bg-muted/80 transition-all"
-          >
-            <Linkedin size={16} /> LinkedIn
-          </a>
           <button
-            onClick={handleInstagramShare}
+            onClick={handleNativeShare}
             className="inline-flex items-center gap-2 rounded-full bg-muted text-foreground font-body text-sm px-5 py-2.5 hover:bg-muted/80 transition-all"
           >
-            <Instagram size={16} /> Instagram
+            <Share2 size={16} /> {navigator.share ? "Share" : "LinkedIn"}
           </button>
         </div>
       </div>
