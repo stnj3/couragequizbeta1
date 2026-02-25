@@ -1,4 +1,18 @@
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+
 const LandingPage = ({ onBegin }: { onBegin: () => void }) => {
+  const [count, setCount] = useState<number | null>(null);
+
+  useEffect(() => {
+    supabase
+      .from("quiz_submissions")
+      .select("id", { count: "exact", head: true })
+      .then(({ count: c }) => {
+        if (c !== null && c > 0) setCount(c);
+      });
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-6 py-12 animate-fade-in-up">
       <div className="max-w-xl w-full text-center space-y-8">
@@ -29,8 +43,14 @@ const LandingPage = ({ onBegin }: { onBegin: () => void }) => {
           Begin the Quiz
         </button>
 
+        {count !== null && (
+          <p className="text-sm text-primary/70 font-body">
+            Join {count.toLocaleString()} people who've discovered their Courage Archetype.
+          </p>
+        )}
+
         <p className="text-xs text-muted-foreground pt-4">
-          © 2025 Shatter The Norm LLC. All rights reserved.
+          © 2026 Shatter The Norm LLC. All rights reserved.
         </p>
       </div>
     </div>

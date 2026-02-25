@@ -13,6 +13,7 @@ const Index = () => {
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const [results, setResults] = useState<ScoreResult | null>(null);
   const [firstName, setFirstName] = useState("");
+  const [resultId, setResultId] = useState<string | undefined>();
 
   const handleAnswer = useCallback((index: number, value: number) => {
     setAnswers((prev) => ({ ...prev, [index]: value }));
@@ -38,7 +39,6 @@ const Index = () => {
       timestamp: new Date().toISOString(),
     };
 
-    // Store to localStorage for v1
     try {
       const existing = JSON.parse(localStorage.getItem("quiz_submissions") || "[]");
       existing.push(submission);
@@ -47,7 +47,8 @@ const Index = () => {
       // silently fail
     }
 
-    await sendToWebhook(submission);
+    const rid = await sendToWebhook(submission);
+    if (rid) setResultId(rid);
     console.log("Email submitted, results calculated");
     setStep("results");
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -56,6 +57,7 @@ const Index = () => {
   const handleRetake = () => {
     setAnswers({});
     setResults(null);
+    setResultId(undefined);
     setStep("quiz");
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -72,7 +74,7 @@ const Index = () => {
         )}
         {step === "email" && <EmailCapture onSubmit={handleEmailSubmit} />}
         {step === "results" && results && (
-          <ResultsPage results={results} firstName={firstName} onRetake={handleRetake} />
+          <ResultsPage results={results} firstName={firstName} onRetake={handleRetake} resultId={resultId} />
         )}
       </div>
     </>

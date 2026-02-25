@@ -22,6 +22,7 @@ export type Database = {
           first_name: string
           id: string
           raw_scores: Json
+          result_id: string
           top_two_archetypes: string[]
         }
         Insert: {
@@ -31,6 +32,7 @@ export type Database = {
           first_name: string
           id?: string
           raw_scores: Json
+          result_id?: string
           top_two_archetypes: string[]
         }
         Update: {
@@ -40,6 +42,7 @@ export type Database = {
           first_name?: string
           id?: string
           raw_scores?: Json
+          result_id?: string
           top_two_archetypes?: string[]
         }
         Relationships: []
