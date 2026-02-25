@@ -7,7 +7,7 @@ const ProgressBar = ({ currentPage, totalPages }: ProgressBarProps) => {
   const progress = (currentPage / totalPages) * 100;
 
   return (
-    <div className="sticky top-0 z-50 w-full px-4 py-3 bg-background/90 backdrop-blur-md border-b border-border/30">
+    <div className="sticky top-0 z-50 w-full px-4 py-3 border-b border-border/30" style={{ backgroundColor: '#1A1A1A' }}>
       <div className="flex items-center justify-center mb-2">
         <span className="text-sm font-body text-muted-foreground">
           {currentPage} of {totalPages}

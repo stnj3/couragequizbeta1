@@ -30,14 +30,14 @@ const QuizPage = ({ answers, onAnswer, onComplete }: QuizPageProps) => {
       onComplete();
     } else {
       setCurrentPage((p) => p + 1);
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.scrollTo(0, 0);
     }
   };
 
   const handleBack = () => {
     setShowErrors(false);
     setCurrentPage((p) => p - 1);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo(0, 0);
   };
 
   return (
