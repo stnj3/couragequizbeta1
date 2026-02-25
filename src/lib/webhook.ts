@@ -1,3 +1,5 @@
+import { supabase } from "@/integrations/supabase/client";
+
 export interface QuizSubmission {
   id: string;
   firstName: string;
@@ -9,12 +11,21 @@ export interface QuizSubmission {
 }
 
 export async function sendToWebhook(data: QuizSubmission): Promise<void> {
-  // TODO: Replace with Beehiiv or Zapier webhook URL
-  // const webhookUrl = "https://your-webhook-url-here";
-  // await fetch(webhookUrl, {
-  //   method: "POST",
-  //   headers: { "Content-Type": "application/json" },
-  //   body: JSON.stringify(data)
-  // });
-  console.log("Quiz submission data:", data);
+  try {
+    const { error } = await supabase.from("quiz_submissions").insert({
+      first_name: data.firstName,
+      email: data.email,
+      raw_scores: data.categories,
+      top_two_archetypes: data.topTwo.map(([name]) => name),
+      answers: data.answers,
+    });
+
+    if (error) {
+      console.error("Failed to save submission:", error.message);
+    } else {
+      console.log("Quiz submission saved to database");
+    }
+  } catch (err) {
+    console.error("Error saving submission:", err);
+  }
 }
