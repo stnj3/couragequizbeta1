@@ -22,7 +22,7 @@ const LandingPage = ({ onBegin }: { onBegin: () => void }) => {
         </div>
 
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-heading font-bold leading-tight tracking-tight">
-          Discover Your<br />Courage Type
+          Discover Your<br />Courage Archetypes
         </h1>
 
         <p className="text-lg sm:text-xl text-primary font-heading italic">
@@ -30,7 +30,7 @@ const LandingPage = ({ onBegin }: { onBegin: () => void }) => {
         </p>
 
         <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-md mx-auto">
-          There are six types of courage — and you lead with two. This quiz maps your unique courage signature based on how you actually move through uncertainty, not how you think you should.
+          There are six types of courage — and you lead with two. This quiz maps your unique courage archetypes based on how you actually move through uncertainty, not how you think you should.
         </p>
 
         <button
