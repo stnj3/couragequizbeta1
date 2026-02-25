@@ -67,7 +67,7 @@ const Index = () => {
       <div className="grain-overlay" />
       <div className="relative z-10">
         {step === "landing" && (
-          <LandingPage onBegin={() => { console.log("Quiz started"); setStep("quiz"); }} />
+          <LandingPage onBegin={() => { console.log("Quiz started"); setStep("quiz"); window.scrollTo({ top: 0 }); }} />
         )}
         {step === "quiz" && (
           <QuizPage answers={answers} onAnswer={handleAnswer} onComplete={handleQuizComplete} />

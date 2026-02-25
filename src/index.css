@@ -130,3 +130,69 @@
 .stagger-children > *:nth-child(4) { animation-delay: 240ms; }
 .stagger-children > *:nth-child(5) { animation-delay: 320ms; }
 .stagger-children > *:nth-child(6) { animation-delay: 400ms; }
+
+/* Gold sparkle burst for missed questions */
+@keyframes sparkle-particle {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--tx), var(--ty)) scale(0);
+  }
+}
+
+.sparkle-burst {
+  position: relative;
+  overflow: visible;
+}
+
+.sparkle-burst::before,
+.sparkle-burst::after {
+  content: "✦";
+  position: absolute;
+  color: hsl(40 55% 58%);
+  font-size: 18px;
+  pointer-events: none;
+  animation: sparkle-particle 0.8s ease-out forwards;
+  z-index: 10;
+}
+
+.sparkle-burst::before {
+  top: -8px;
+  right: -8px;
+  --tx: 12px;
+  --ty: -12px;
+}
+
+.sparkle-burst::after {
+  top: -4px;
+  left: -8px;
+  --tx: -14px;
+  --ty: -10px;
+}
+
+/* Additional sparkle particles via box-shadow animation */
+@keyframes sparkle-ring {
+  0% {
+    box-shadow:
+      8px -8px 0 0 hsl(40 55% 58%),
+      -8px -6px 0 0 hsl(40 55% 68%),
+      10px 6px 0 0 hsl(40 55% 48%),
+      -6px 8px 0 0 hsl(40 55% 58%);
+    opacity: 1;
+  }
+  100% {
+    box-shadow:
+      20px -20px 0 -2px hsl(40 55% 58%),
+      -22px -18px 0 -2px hsl(40 55% 68%),
+      24px 16px 0 -2px hsl(40 55% 48%),
+      -18px 22px 0 -2px hsl(40 55% 58%);
+    opacity: 0;
+  }
+}
+
+.sparkle-burst {
+  animation: sparkle-ring 0.7s ease-out;
+}
