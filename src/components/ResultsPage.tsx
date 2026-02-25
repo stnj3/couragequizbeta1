@@ -130,7 +130,8 @@ const ResultsPage = ({ results, firstName, onRetake, resultId }: ResultsPageProp
     if (!shareImageUrl) return;
     const a = document.createElement("a");
     a.href = shareImageUrl;
-    a.download = "my-courage-archetypes.png";
+    const safeName = firstName.toLowerCase().replace(/[^a-z]/g, "") || "result";
+    a.download = `courage-archetypes-${safeName}.png`;
     a.click();
   };
 
@@ -264,7 +265,7 @@ const ResultsPage = ({ results, firstName, onRetake, resultId }: ResultsPageProp
             </div>
           </div>
         )}
-        <p className="text-center text-xs text-muted-foreground/60 font-body mb-6">
+        <p className="text-center text-xs text-muted-foreground/60 font-body mb-6 sm:hidden">
           Hold to save to your photos 📲
         </p>
 
