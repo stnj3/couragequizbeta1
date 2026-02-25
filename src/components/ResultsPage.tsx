@@ -229,9 +229,6 @@ const ResultsPage = ({ results, firstName, onRetake, resultId }: ResultsPageProp
                         }}
                       />
                     </div>
-                    <span className="text-xs font-body text-muted-foreground tabular-nums w-6 text-right">
-                      {score}
-                    </span>
                   </div>
                 </button>
 

@@ -42,7 +42,7 @@ const EmailCapture = ({ onSubmit }: EmailCaptureProps) => {
         </h2>
 
         <p className="text-muted-foreground font-body text-base">
-          Enter your name and email to see your Courage Signature.
+          Enter your name and email to see your Courage Archetypes.
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4 text-left mt-8">
@@ -89,7 +89,7 @@ const EmailCapture = ({ onSubmit }: EmailCaptureProps) => {
                 Revealing...
               </span>
             ) : (
-              "Reveal My Courage Type"
+              "Reveal My Courage Archetypes"
             )}
           </button>
         </form>
