@@ -64,30 +64,34 @@ const ResultsPage = ({ results, firstName, onRetake, resultId }: ResultsPageProp
 
     // Header
     ctx.fillStyle = "#D4A853";
-    ctx.font = "italic 42px Georgia, serif";
+    ctx.font = "bold 52px Georgia, serif";
     ctx.textAlign = "center";
     ctx.fillText("My Courage Archetype", 540, 240);
 
     // Primary archetype
     ctx.fillStyle = "#FFF8F0";
-    ctx.font = "bold 72px Georgia, serif";
+    ctx.font = "bold 84px Georgia, serif";
     ctx.fillText(`${top1.title} ${top1.emoji}`, 540, 520);
     ctx.fillStyle = "#D4A853";
-    ctx.font = "italic 36px Georgia, serif";
-    ctx.fillText(`"${top1.tagline}"`, 540, 590);
+    ctx.font = "italic 40px Georgia, serif";
+    ctx.fillText(`"${top1.tagline}"`, 540, 600);
 
-    // Plus separator
-    ctx.fillStyle = "rgba(255, 248, 240, 0.4)";
-    ctx.font = "48px Georgia, serif";
-    ctx.fillText("+", 540, 720);
+    // Gold line separator
+    ctx.strokeStyle = "rgba(212, 168, 83, 0.5)";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(340, 710);
+    ctx.lineTo(740, 710);
+    ctx.stroke();
+    ctx.lineWidth = 1;
 
     // Secondary archetype
     ctx.fillStyle = "#FFF8F0";
-    ctx.font = "bold 60px Georgia, serif";
-    ctx.fillText(`${top2.title} ${top2.emoji}`, 540, 870);
+    ctx.font = "bold 72px Georgia, serif";
+    ctx.fillText(`${top2.title} ${top2.emoji}`, 540, 850);
     ctx.fillStyle = "#D4A853";
-    ctx.font = "italic 32px Georgia, serif";
-    ctx.fillText(`"${top2.tagline}"`, 540, 930);
+    ctx.font = "italic 36px Georgia, serif";
+    ctx.fillText(`"${top2.tagline}"`, 540, 920);
 
     // Decorative line
     ctx.strokeStyle = "rgba(212, 168, 83, 0.3)";
@@ -101,9 +105,8 @@ const ResultsPage = ({ results, firstName, onRetake, resultId }: ResultsPageProp
     ctx.font = "28px sans-serif";
     ctx.fillText("Discover yours at", 540, 1200);
     ctx.fillStyle = "#D4A853";
-    ctx.font = "bold 30px sans-serif";
-    const displayUrl = resultsUrl.replace(/^https?:\/\//, "");
-    ctx.fillText(displayUrl, 540, 1250);
+    ctx.font = "bold 32px sans-serif";
+    ctx.fillText("couragequizbeta1.lovable.app", 540, 1250);
 
     // Copyright
     ctx.fillStyle = "rgba(255, 248, 240, 0.3)";
@@ -227,21 +230,27 @@ const ResultsPage = ({ results, firstName, onRetake, resultId }: ResultsPageProp
         </div>
       </div>
 
-      {/* Share Card Preview */}
-      <div className="mb-10">
-        <h3 className="text-lg font-heading font-bold text-center mb-2">Share Your Courage Type</h3>
-        <p className="text-center text-xs text-muted-foreground font-body mb-4">
-          Hold to save to your photos 📲
-        </p>
+      {/* Divider + Share Section */}
+      <div className="mt-16 mb-10">
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent mb-8" />
+        <h3 className="text-2xl sm:text-3xl font-heading font-bold text-center mb-8">
+          Share Your Results
+        </h3>
+
+        {/* Share Card */}
         {shareImageUrl && (
-          <div className="flex justify-center mb-4">
+          <div className="flex justify-center mb-3">
             <img
               src={shareImageUrl}
               alt={`My Courage Archetype: ${top1.title} + ${top2.title}`}
-              className="w-full max-w-xs rounded-xl shadow-lg"
+              className="w-full max-w-sm rounded-2xl shadow-[0_8px_32px_rgba(212,168,83,0.15)] border border-primary/30"
             />
           </div>
         )}
+        <p className="text-center text-xs text-muted-foreground/60 font-body mb-6">
+          Hold to save to your photos 📲
+        </p>
+
         <div className="flex flex-wrap justify-center gap-3">
           <button
             onClick={handleDownload}
@@ -278,13 +287,6 @@ const ResultsPage = ({ results, firstName, onRetake, resultId }: ResultsPageProp
             <Instagram size={16} /> Instagram
           </button>
         </div>
-      </div>
-
-      {/* Share text preview */}
-      <div className="text-center mb-10">
-        <p className="text-sm text-muted-foreground font-body">
-          I'm {top1.title} {top1.emoji} + {top2.title} {top2.emoji}
-        </p>
       </div>
 
       {/* Retake */}
