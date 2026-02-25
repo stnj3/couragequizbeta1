@@ -95,7 +95,7 @@ const EmailCapture = ({ onSubmit }: EmailCaptureProps) => {
         </form>
 
         <p className="text-[11px] text-muted-foreground pt-2">
-          Your info stays private. We'll only use it to send you your results.
+          Your info stays private. No spam, ever.
         </p>
       </div>
     </div>
