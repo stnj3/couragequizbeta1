@@ -39,7 +39,7 @@ const LandingPage = ({ onBegin }: { onBegin: () => void }) => {
         </p>
 
         <p className="text-base sm:text-lg leading-relaxed max-w-md mx-auto" style={{ color: "hsl(30 20% 65%)" }}>
-          There are six types of courage — and you lead with two. This quiz maps your unique courage archetypes based on how you actually move through uncertainty, not how you think you should.
+          There are six types of courage — and you naturally lead with two. This quiz maps your unique courage archetypes based on how you actually move through uncertainty, not how you think you should.
         </p>
 
         <button
