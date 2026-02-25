@@ -18,9 +18,19 @@ const QuizPage = ({ answers, onAnswer, onComplete }: QuizPageProps) => {
 
   const allAnswered = pageQuestions.every((_, i) => answers[startIndex + i] !== undefined);
 
+  const missedQuestions = pageQuestions
+    .map((_, i) => startIndex + i)
+    .filter((idx) => answers[idx] === undefined);
+
   const handleNext = () => {
     if (!allAnswered) {
       setShowErrors(true);
+      // Scroll to first missed question
+      const firstMissed = missedQuestions[0];
+      if (firstMissed !== undefined) {
+        const el = document.getElementById(`question-${firstMissed}`);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
       return;
     }
     setShowErrors(false);
@@ -30,14 +40,14 @@ const QuizPage = ({ answers, onAnswer, onComplete }: QuizPageProps) => {
       onComplete();
     } else {
       setCurrentPage((p) => p + 1);
-      window.scrollTo(0, 0);
+      window.scrollTo({ top: 0 });
     }
   };
 
   const handleBack = () => {
     setShowErrors(false);
     setCurrentPage((p) => p - 1);
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0 });
   };
 
   return (
@@ -53,10 +63,11 @@ const QuizPage = ({ answers, onAnswer, onComplete }: QuizPageProps) => {
             return (
               <div
                 key={globalIndex}
+                id={`question-${globalIndex}`}
                 className="animate-fade-in-up opacity-0"
                 style={{ animationFillMode: "forwards" }}
               >
-                <div className="rounded-xl bg-card text-card-foreground p-5 sm:p-6 shadow-sm">
+                <div className={`rounded-xl bg-card text-card-foreground p-5 sm:p-6 shadow-sm transition-all duration-300 ${hasError ? "border-[3px] border-destructive sparkle-burst" : ""}`}>
                   <p className="font-body text-sm sm:text-base font-medium leading-relaxed mb-4">
                     {globalIndex + 1}. {q.text}
                   </p>
@@ -74,7 +85,8 @@ const QuizPage = ({ answers, onAnswer, onComplete }: QuizPageProps) => {
 
         {showErrors && !allAnswered && (
           <p className="text-destructive text-sm text-center mt-4 font-body animate-fade-in">
-            Please answer all questions before continuing.
+            Please answer question{missedQuestions.length > 1 ? "s" : ""}{" "}
+            {missedQuestions.map((q) => q + 1).join(", ")} before continuing.
           </p>
         )}
 

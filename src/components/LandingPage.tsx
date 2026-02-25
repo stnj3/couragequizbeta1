@@ -14,14 +14,23 @@ const LandingPage = ({ onBegin }: { onBegin: () => void }) => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-6 py-12 animate-fade-in-up">
-      <div className="max-w-xl w-full text-center space-y-8">
+    <div className="min-h-screen flex flex-col items-center justify-center px-6 py-12 animate-fade-in-up relative overflow-hidden"
+      style={{
+        background: "linear-gradient(165deg, hsl(30 10% 8%) 0%, hsl(25 15% 12%) 40%, hsl(35 20% 14%) 70%, hsl(30 10% 10%) 100%)"
+      }}
+    >
+      {/* Subtle gold radial glow */}
+      <div className="absolute inset-0 pointer-events-none" style={{
+        background: "radial-gradient(ellipse 60% 40% at 50% 30%, hsla(40,55%,58%,0.08) 0%, transparent 70%)"
+      }} />
+
+      <div className="max-w-xl w-full text-center space-y-8 relative z-10">
         {/* Emoji cluster */}
-        <div className="text-4xl sm:text-5xl tracking-widest mb-2 opacity-80">
+        <div className="text-4xl sm:text-5xl tracking-widest mb-2 opacity-85">
           🦁 🐙 🐺 🐬 🦉 🦋
         </div>
 
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-heading font-bold leading-tight tracking-tight">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-heading font-bold leading-tight tracking-tight text-foreground">
           Discover Your<br />Courage Archetypes
         </h1>
 
@@ -29,7 +38,7 @@ const LandingPage = ({ onBegin }: { onBegin: () => void }) => {
           A 5-minute assessment that reveals how you show up when it matters most.
         </p>
 
-        <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-md mx-auto">
+        <p className="text-base sm:text-lg leading-relaxed max-w-md mx-auto" style={{ color: "hsl(30 20% 65%)" }}>
           There are six types of courage — and you lead with two. This quiz maps your unique courage archetypes based on how you actually move through uncertainty, not how you think you should.
         </p>
 
@@ -38,18 +47,22 @@ const LandingPage = ({ onBegin }: { onBegin: () => void }) => {
             console.log("Quiz started");
             onBegin();
           }}
-          className="inline-flex items-center justify-center rounded-full bg-primary text-primary-foreground font-body font-semibold text-lg px-10 py-4 hover:opacity-90 transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]"
+          className="inline-flex items-center justify-center rounded-full font-body font-semibold text-lg px-10 py-4 transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]"
+          style={{
+            background: "linear-gradient(135deg, hsl(40 55% 50%), hsl(40 55% 62%))",
+            color: "hsl(0 0% 10%)",
+          }}
         >
           Begin the Quiz
         </button>
 
         {count !== null && (
-          <p className="text-sm text-primary/70 font-body">
+          <p className="text-sm font-body" style={{ color: "hsl(40 55% 58% / 0.7)" }}>
             Join {count.toLocaleString()} people who've discovered their Courage Archetypes.
           </p>
         )}
 
-        <p className="text-xs text-muted-foreground pt-4">
+        <p className="text-xs pt-4" style={{ color: "hsl(30 20% 45%)" }}>
           © 2026 Shatter The Norm LLC. All rights reserved.
         </p>
       </div>
