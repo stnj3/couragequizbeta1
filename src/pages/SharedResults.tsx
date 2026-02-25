@@ -50,7 +50,7 @@ const SharedResults = () => {
     <div className="min-h-screen flex flex-col items-center justify-center px-6 py-12 animate-fade-in-up">
       <div className="max-w-lg w-full text-center space-y-8">
         <p className="text-sm font-body text-muted-foreground uppercase tracking-widest">
-          Someone's Courage Archetype
+          Someone's Courage Archetypes
         </p>
 
         <div className="space-y-2">
@@ -74,7 +74,7 @@ const SharedResults = () => {
             to="/"
             className="inline-flex items-center justify-center rounded-full bg-primary text-primary-foreground font-body font-semibold text-lg px-10 py-4 hover:opacity-90 transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]"
           >
-            Discover Your Courage Archetype →
+            Discover Your Courage Archetypes →
           </Link>
         </div>
 

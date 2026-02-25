@@ -45,7 +45,7 @@ const LandingPage = ({ onBegin }: { onBegin: () => void }) => {
 
         {count !== null && (
           <p className="text-sm text-primary/70 font-body">
-            Join {count.toLocaleString()} people who've discovered their Courage Archetype.
+            Join {count.toLocaleString()} people who've discovered their Courage Archetypes.
           </p>
         )}
 

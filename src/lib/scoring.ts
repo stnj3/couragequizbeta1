@@ -18,29 +18,36 @@ export function calculateScores(answers: Record<number, number>): ScoreResult {
     "Spiritual Courage": 0,
   };
 
+  // Track max single-question response per category for tie-breaking
+  const categoryMaxResponse: Record<string, number> = {
+    "Physical Courage": 0,
+    "Emotional Courage": 0,
+    "Moral Courage": 0,
+    "Social Courage": 0,
+    "Intellectual Courage": 0,
+    "Spiritual Courage": 0,
+  };
+
   questions.forEach((question, index) => {
     const answer = answers[index];
     if (answer) {
       categories[question.category] += answer;
+      if (answer > categoryMaxResponse[question.category]) {
+        categoryMaxResponse[question.category] = answer;
+      }
     }
   });
 
-  const sorted = Object.entries(categories).sort(([, a], [, b]) => b - a);
+  // Sort by score desc, then by highest single response desc, then alphabetically
+  const sorted = Object.entries(categories).sort(([catA, a], [catB, b]) => {
+    if (b !== a) return b - a;
+    const maxA = categoryMaxResponse[catA];
+    const maxB = categoryMaxResponse[catB];
+    if (maxB !== maxA) return maxB - maxA;
+    return catA.localeCompare(catB);
+  });
 
-  const topScore = sorted[0];
-  const secondScoreValue = sorted[1][1];
-  const tiedForSecond = sorted.filter(
-    ([cat, score]) => score === secondScoreValue && cat !== topScore[0]
-  );
-
-  let secondPick: [string, number];
-  if (tiedForSecond.length > 1) {
-    secondPick = tiedForSecond[Math.floor(Math.random() * tiedForSecond.length)] as [string, number];
-  } else {
-    secondPick = sorted[1] as [string, number];
-  }
-
-  const topTwo: [string, number][] = [topScore as [string, number], secondPick];
+  const topTwo: [string, number][] = [sorted[0] as [string, number], sorted[1] as [string, number]];
 
   const totalScore = Object.values(categories).reduce((sum, s) => sum + s, 0);
   const percentages: Record<string, number> = {};
