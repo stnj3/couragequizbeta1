@@ -28,7 +28,7 @@ const LikertScale = ({ questionIndex, value, onChange, hasError }: LikertScalePr
                 ${
                   isSelected
                     ? "bg-primary text-primary-foreground shadow-lg scale-105"
-                    : "bg-muted/60 text-muted-foreground [@media(hover:hover)]:hover:bg-muted [@media(hover:hover)]:hover:text-foreground"
+                    : "bg-muted/80 text-foreground/80 [@media(hover:hover)]:hover:bg-muted [@media(hover:hover)]:hover:text-foreground"
                 }
               `}
             >
