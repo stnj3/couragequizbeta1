@@ -9,7 +9,10 @@ const LandingPage = ({ onBegin }: { onBegin: () => void }) => {
       .from("quiz_submissions")
       .select("id", { count: "exact", head: true })
       .then(({ count: c }) => {
-        if (c !== null && c > 0) setCount(c);
+        if (c !== null) {
+          const displayCount = 200 + (c * 8);
+          setCount(displayCount);
+        }
       });
   }, []);
 

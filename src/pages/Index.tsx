@@ -34,7 +34,7 @@ const Index = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const handleEmailSubmit = async (name: string, email: string) => {
+  const handleEmailSubmit = async (name: string, email: string, purpose: string) => {
     setFirstName(name);
     const scored = calculateScores(answers);
     setResults(scored);
@@ -43,6 +43,7 @@ const Index = () => {
       id: crypto.randomUUID(),
       firstName: name,
       email,
+      purpose,
       answers,
       categories: scored.categories,
       topTwo: scored.topTwo,

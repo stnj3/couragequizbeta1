@@ -21,6 +21,7 @@ export type Database = {
           email: string
           first_name: string
           id: string
+          purpose: string | null
           raw_scores: Json
           result_id: string
           top_two_archetypes: string[]
@@ -31,6 +32,7 @@ export type Database = {
           email: string
           first_name: string
           id?: string
+          purpose?: string | null
           raw_scores: Json
           result_id?: string
           top_two_archetypes: string[]
@@ -41,6 +43,7 @@ export type Database = {
           email?: string
           first_name?: string
           id?: string
+          purpose?: string | null
           raw_scores?: Json
           result_id?: string
           top_two_archetypes?: string[]
