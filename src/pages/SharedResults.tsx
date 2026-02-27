@@ -57,7 +57,7 @@ const SharedResults = () => {
           <h1 className="text-3xl sm:text-4xl font-heading font-bold">
             {arch1.title} {arch1.emoji}
           </h1>
-          <p className="text-primary font-heading italic text-base">"{arch1.tagline}"</p>
+          <p className="text-primary font-heading font-semibold text-base">"{arch1.tagline}"</p>
         </div>
 
         <p className="text-2xl text-muted-foreground">+</p>
@@ -66,7 +66,7 @@ const SharedResults = () => {
           <h2 className="text-2xl sm:text-3xl font-heading font-bold">
             {arch2.title} {arch2.emoji}
           </h2>
-          <p className="text-primary font-heading italic text-base">"{arch2.tagline}"</p>
+          <p className="text-primary font-heading font-semibold text-base">"{arch2.tagline}"</p>
         </div>
 
         <div className="pt-6">
