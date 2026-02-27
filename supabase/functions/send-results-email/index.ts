@@ -7,6 +7,7 @@ interface ArchetypeInfo {
   emoji: string;
   tagline: string;
   description: string;
+  watchFor: string;
 }
 
 const archetypes: Record<string, ArchetypeInfo> = {
@@ -15,38 +16,53 @@ const archetypes: Record<string, ArchetypeInfo> = {
     emoji: "🦁",
     tagline: "Move first. Adjust later.",
     description: "You possess remarkable resilience when facing physical challenges. Like the lion, you confront threats head-on, using your strength and protective instincts to defend yourself and those around you.",
+    watchFor: "You may normalize pain, disappear into doing, or over-identify with being the one who can handle it.",
   },
   "Emotional Courage": {
     title: "The Octopus",
     emoji: "🐙",
     tagline: "Feel it before you fix it.",
     description: "You are open and honest with your emotions, willing to be vulnerable and face difficult feelings in order to grow. Like the octopus, you navigate emotional depths and reveal your true self.",
+    watchFor: "You may overexpose without grounding, hold emotional weight that isn't yours, or confuse expression with resolution.",
   },
   "Moral Courage": {
     title: "The Wolf",
     emoji: "🐺",
     tagline: "Hold the line, even alone.",
     description: "You have a strong sense of right and wrong and are unafraid to defend your principles, even when it comes at a personal cost. Like the wolf, you live by an inner code.",
+    watchFor: "You may become inflexible, isolate instead of engaging disagreement, or carry moral weight alone and silently.",
   },
   "Social Courage": {
     title: "The Dolphin",
     emoji: "🐬",
     tagline: "Go toward people, not away.",
     description: "Your confidence in social settings allows you to stand up for yourself and others, even when it means going against the crowd. Like the dolphin, you navigate social dynamics with relational intelligence.",
+    watchFor: "You may take on social risks others aren't ready for, over-share for connection, or speak before sensing the space.",
   },
   "Intellectual Courage": {
     title: "The Owl",
     emoji: "🦉",
     tagline: "Question everything, including yourself.",
     description: "You are eager to challenge your beliefs and explore new ideas, embracing uncertainty as an opportunity to grow. Like the owl, you seek understanding even in the dark.",
+    watchFor: "You may stay in the abstract to avoid emotional risk, stall action for more information, or appear overly contrarian.",
   },
   "Spiritual Courage": {
     title: "The Butterfly",
     emoji: "🦋",
     tagline: "Trust the vision before the evidence arrives.",
     description: "You remain grounded in purpose, values, or long-range vision especially when the path forward is unclear. Like the butterfly, you transform through life's challenges.",
+    watchFor: "You may default to abstract optimism when clarity is needed, under-communicate in crisis, or bypass hard conversations in favor of higher purpose.",
   },
 };
+
+const categoryOrder = [
+  "Physical Courage",
+  "Emotional Courage",
+  "Moral Courage",
+  "Social Courage",
+  "Intellectual Courage",
+  "Spiritual Courage",
+];
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -59,7 +75,7 @@ serve(async (req) => {
   }
 
   try {
-    const { firstName, email, topTwo, resultId } = await req.json();
+    const { firstName, email, topTwo, resultId, scores } = await req.json();
 
     const arch1 = archetypes[topTwo[0]];
     const arch2 = archetypes[topTwo[1]];
@@ -72,6 +88,47 @@ serve(async (req) => {
     }
 
     const resultsUrl = `https://courageprofile.com/results/${resultId}`;
+
+    // Build score bars HTML
+    const scoreValues = categoryOrder.map(cat => scores?.[cat] || 0);
+    const maxScore = Math.max(...scoreValues);
+    const minScore = Math.min(...scoreValues);
+    const scoreRange = maxScore - minScore || 1;
+
+    const scoreBarsHtml = categoryOrder.map(cat => {
+      const arch = archetypes[cat];
+      const score = scores?.[cat] || 0;
+      const barPercent = Math.round(20 + ((score - minScore) / scoreRange) * 80);
+      const isTopTwo = topTwo.includes(cat);
+      const barColor = isTopTwo ? "#D4A853" : "#1A6B5C";
+
+      return `
+        <tr>
+          <td style="padding:6px 0;">
+            <p style="color:#c4bfb4;font-size:13px;margin:0 0 4px 0;">${arch.emoji} ${arch.title}</p>
+            <table width="100%" cellpadding="0" cellspacing="0">
+              <tr>
+                <td style="background-color:#2a2a2a;border-radius:4px;">
+                  <div style="background-color:${barColor};height:12px;border-radius:4px;width:${barPercent}%;"></div>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>`;
+    }).join("");
+
+    // Build archetype card HTML helper
+    const archCard = (arch: ArchetypeInfo) => `
+      <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#1a1a1a;border-radius:12px;border:1px solid #2a2a2a;">
+        <tr>
+          <td style="padding:28px;">
+            <h2 style="color:#f5f0e8;font-size:22px;font-weight:600;margin:0 0 6px 0;">${arch.emoji} ${arch.title}</h2>
+            <p style="color:#d4a574;font-size:14px;font-style:italic;margin:0 0 12px 0;">${arch.tagline}</p>
+            <p style="color:#c4bfb4;font-size:15px;line-height:1.6;margin:0 0 14px 0;">${arch.description}</p>
+            <p style="color:#999;font-size:13px;line-height:1.5;margin:0;"><strong style="color:#c4bfb4;">Watch for:</strong> ${arch.watchFor}</p>
+          </td>
+        </tr>
+      </table>`;
 
     const html = `<!DOCTYPE html>
 <html>
@@ -102,16 +159,7 @@ serve(async (req) => {
           <!-- Archetype 1 -->
           <tr>
             <td style="padding-bottom:16px;">
-              <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#1a1a1a;border-radius:12px;border:1px solid #2a2a2a;">
-                <tr>
-                  <td style="padding:28px;">
-                    <p style="font-size:40px;margin:0 0 12px 0;">${arch1.emoji}</p>
-                    <h2 style="color:#f5f0e8;font-size:22px;font-weight:600;margin:0 0 6px 0;">${arch1.title}</h2>
-                    <p style="color:#d4a574;font-size:14px;font-style:italic;margin:0 0 12px 0;">${arch1.tagline}</p>
-                    <p style="color:#c4bfb4;font-size:15px;line-height:1.6;margin:0;">${arch1.description}</p>
-                  </td>
-                </tr>
-              </table>
+              ${archCard(arch1)}
             </td>
           </tr>
 
@@ -125,13 +173,20 @@ serve(async (req) => {
           <!-- Archetype 2 -->
           <tr>
             <td style="padding-bottom:32px;">
+              ${archCard(arch2)}
+            </td>
+          </tr>
+
+          <!-- Full Courage Profile -->
+          <tr>
+            <td style="padding-bottom:32px;">
               <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#1a1a1a;border-radius:12px;border:1px solid #2a2a2a;">
                 <tr>
                   <td style="padding:28px;">
-                    <p style="font-size:40px;margin:0 0 12px 0;">${arch2.emoji}</p>
-                    <h2 style="color:#f5f0e8;font-size:22px;font-weight:600;margin:0 0 6px 0;">${arch2.title}</h2>
-                    <p style="color:#d4a574;font-size:14px;font-style:italic;margin:0 0 12px 0;">${arch2.tagline}</p>
-                    <p style="color:#c4bfb4;font-size:15px;line-height:1.6;margin:0;">${arch2.description}</p>
+                    <h3 style="color:#f5f0e8;font-size:18px;font-weight:600;margin:0 0 16px 0;">Full Courage Profile</h3>
+                    <table width="100%" cellpadding="0" cellspacing="0">
+                      ${scoreBarsHtml}
+                    </table>
                   </td>
                 </tr>
               </table>
@@ -141,14 +196,14 @@ serve(async (req) => {
           <!-- CTA Button -->
           <tr>
             <td align="center" style="padding-bottom:40px;">
-              <a href="${resultsUrl}" style="display:inline-block;background-color:#d4a574;color:#0e0e0e;font-size:16px;font-weight:600;text-decoration:none;padding:14px 32px;border-radius:8px;">View Full Results</a>
+              <a href="${resultsUrl}" style="display:inline-block;background-color:#d4a574;color:#0e0e0e;font-size:16px;font-weight:600;text-decoration:none;padding:14px 32px;border-radius:8px;">View Your Results</a>
             </td>
           </tr>
 
           <!-- Footer -->
           <tr>
             <td align="center" style="border-top:1px solid #2a2a2a;padding-top:24px;">
-              <p style="color:#666;font-size:13px;margin:0 0 8px 0;">© 2026 Shatter The Norm LLC. All rights reserved.</p>
+              <p style="color:#666;font-size:13px;margin:0 0 8px 0;">© 2026 Courage Profile. All rights reserved.</p>
               <a href="https://courageprofile.com" style="color:#d4a574;font-size:13px;text-decoration:none;">courageprofile.com</a>
             </td>
           </tr>
