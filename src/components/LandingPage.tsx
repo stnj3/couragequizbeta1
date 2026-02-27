@@ -66,7 +66,7 @@ const LandingPage = ({ onBegin }: { onBegin: () => void }) => {
         )}
 
         <p className="text-xs pt-4" style={{ color: "hsl(220 15% 50%)" }}>
-          © 2026 Shatter The Norm LLC. All rights reserved.
+          © 2026 Courage Profile. All rights reserved.
         </p>
       </div>
     </div>

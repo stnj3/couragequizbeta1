@@ -7,16 +7,20 @@ const SharedResults = () => {
   const { resultId } = useParams<{ resultId: string }>();
   const [loading, setLoading] = useState(true);
   const [topTwo, setTopTwo] = useState<string[]>([]);
+  const [firstName, setFirstName] = useState("");
 
   useEffect(() => {
     if (!resultId) return;
     supabase
       .from("quiz_submissions")
-      .select("top_two_archetypes")
+      .select("top_two_archetypes, first_name")
       .eq("result_id", resultId)
       .single()
       .then(({ data }) => {
-        if (data) setTopTwo(data.top_two_archetypes);
+        if (data) {
+          setTopTwo(data.top_two_archetypes);
+          setFirstName(data.first_name || "");
+        }
         setLoading(false);
       });
   }, [resultId]);
@@ -50,7 +54,7 @@ const SharedResults = () => {
     <div className="min-h-screen flex flex-col items-center justify-center px-6 py-12 animate-fade-in-up">
       <div className="max-w-lg w-full text-center space-y-8">
         <p className="text-sm font-body text-muted-foreground uppercase tracking-widest">
-          Someone's Courage Archetypes
+          {firstName ? `${firstName}'s Courage Archetypes` : "Courage Archetypes"}
         </p>
 
         <div className="space-y-2">
@@ -79,7 +83,7 @@ const SharedResults = () => {
         </div>
 
         <p className="text-xs text-muted-foreground pt-4">
-          © 2026 Shatter The Norm LLC. All rights reserved.
+          © 2026 Courage Profile. All rights reserved.
         </p>
       </div>
     </div>
