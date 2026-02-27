@@ -7,20 +7,20 @@ interface QuizPageProps {
   answers: Record<number, number>;
   onAnswer: (index: number, value: number) => void;
   onComplete: () => void;
+  shuffledIndices: number[];
 }
 
-const QuizPage = ({ answers, onAnswer, onComplete }: QuizPageProps) => {
+const QuizPage = ({ answers, onAnswer, onComplete, shuffledIndices }: QuizPageProps) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [showErrors, setShowErrors] = useState(false);
 
   const startIndex = currentPage * QUESTIONS_PER_PAGE;
-  const pageQuestions = questions.slice(startIndex, startIndex + QUESTIONS_PER_PAGE);
+  const pageIndices = shuffledIndices.slice(startIndex, startIndex + QUESTIONS_PER_PAGE);
 
-  const allAnswered = pageQuestions.every((_, i) => answers[startIndex + i] !== undefined);
+  const allAnswered = pageIndices.every((idx) => answers[idx] !== undefined);
 
-  const missedQuestions = pageQuestions
-    .map((_, i) => startIndex + i)
-    .filter((idx) => answers[idx] === undefined);
+  const missedQuestions = pageIndices.filter((idx) => answers[idx] === undefined);
+
 
   const handleNext = () => {
     if (!allAnswered) {
@@ -56,8 +56,8 @@ const QuizPage = ({ answers, onAnswer, onComplete }: QuizPageProps) => {
 
       <div className="flex-1 px-4 sm:px-6 py-6 max-w-2xl mx-auto w-full animate-fade-in">
         <div className="space-y-8 stagger-children">
-          {pageQuestions.map((q, i) => {
-            const globalIndex = startIndex + i;
+          {pageIndices.map((globalIndex, i) => {
+            const q = questions[globalIndex];
             const hasError = showErrors && answers[globalIndex] === undefined;
 
             return (
@@ -69,7 +69,7 @@ const QuizPage = ({ answers, onAnswer, onComplete }: QuizPageProps) => {
               >
                 <div className={`rounded-xl bg-card text-card-foreground p-5 sm:p-6 shadow-sm transition-all duration-300 ${hasError ? "border-[3px] border-destructive sparkle-burst" : ""}`}>
                   <p className="font-body text-sm sm:text-base font-medium leading-relaxed mb-4">
-                    {globalIndex + 1}. {q.text}
+                    {startIndex + i + 1}. {q.text}
                   </p>
                   <LikertScale
                     questionIndex={globalIndex}
@@ -86,7 +86,7 @@ const QuizPage = ({ answers, onAnswer, onComplete }: QuizPageProps) => {
         {showErrors && !allAnswered && (
           <p className="text-destructive text-sm text-center mt-4 font-body animate-fade-in">
             Please answer question{missedQuestions.length > 1 ? "s" : ""}{" "}
-            {missedQuestions.map((q) => q + 1).join(", ")} before continuing.
+            {missedQuestions.map((idx) => startIndex + pageIndices.indexOf(idx) + 1).join(", ")} before continuing.
           </p>
         )}
 
