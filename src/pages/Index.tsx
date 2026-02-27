@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 import LandingPage from "@/components/LandingPage";
 import QuizPage from "@/components/QuizPage";
 import EmailCapture from "@/components/EmailCapture";
@@ -14,6 +14,16 @@ const Index = () => {
   const [results, setResults] = useState<ScoreResult | null>(null);
   const [firstName, setFirstName] = useState("");
   const [resultId, setResultId] = useState<string | undefined>();
+  const [quizKey, setQuizKey] = useState(0);
+
+  const shuffledIndices = useMemo(() => {
+    const indices = Array.from({ length: 42 }, (_, i) => i);
+    for (let i = indices.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [indices[i], indices[j]] = [indices[j], indices[i]];
+    }
+    return indices;
+  }, [quizKey]);
 
   const handleAnswer = useCallback((index: number, value: number) => {
     setAnswers((prev) => ({ ...prev, [index]: value }));
@@ -58,6 +68,7 @@ const Index = () => {
     setAnswers({});
     setResults(null);
     setResultId(undefined);
+    setQuizKey(k => k + 1);
     setStep("quiz");
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -70,7 +81,7 @@ const Index = () => {
           <LandingPage onBegin={() => { console.log("Quiz started"); setStep("quiz"); window.scrollTo({ top: 0 }); }} />
         )}
         {step === "quiz" && (
-          <QuizPage answers={answers} onAnswer={handleAnswer} onComplete={handleQuizComplete} />
+          <QuizPage answers={answers} onAnswer={handleAnswer} onComplete={handleQuizComplete} shuffledIndices={shuffledIndices} />
         )}
         {step === "email" && <EmailCapture onSubmit={handleEmailSubmit} />}
         {step === "results" && results && (
