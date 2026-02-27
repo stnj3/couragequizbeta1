@@ -10,7 +10,7 @@ const LandingPage = ({ onBegin }: { onBegin: () => void }) => {
       .select("id", { count: "exact", head: true })
       .then(({ count: c }) => {
         if (c !== null) {
-          const displayCount = 200 + (c * 8);
+          const displayCount = 250 + (c * 3);
           setCount(displayCount);
         }
       });
