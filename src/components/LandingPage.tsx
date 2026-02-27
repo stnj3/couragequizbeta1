@@ -34,8 +34,8 @@ const LandingPage = ({ onBegin }: { onBegin: () => void }) => {
           Discover Your<br />Courage Archetypes
         </h1>
 
-        <p className="text-lg sm:text-xl text-primary font-heading italic">
-          A 3-minute assessment that reveals how you show up when it matters most.
+        <p className="text-lg sm:text-xl text-primary font-heading font-semibold">
+          A 5-minute assessment that reveals how you show up when it matters most.
         </p>
 
         <p className="text-base sm:text-lg leading-relaxed max-w-md mx-auto" style={{ color: "hsl(220 15% 68%)" }}>

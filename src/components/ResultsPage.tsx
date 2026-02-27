@@ -84,7 +84,7 @@ const ResultsPage = ({ results, firstName, onRetake, resultId }: ResultsPageProp
     ctx.font = "bold 88px Georgia, serif";
     ctx.fillText(`${top1.title} ${top1.emoji}`, 540, 560);
     ctx.fillStyle = "#FFF8F0";
-    ctx.font = "italic 42px Georgia, serif";
+    ctx.font = "42px Georgia, serif";
     ctx.fillText(`"${top1.tagline}"`, 540, 640);
 
     // Gold line separator between archetypes
@@ -100,7 +100,7 @@ const ResultsPage = ({ results, firstName, onRetake, resultId }: ResultsPageProp
     ctx.font = "bold 76px Georgia, serif";
     ctx.fillText(`${top2.title} ${top2.emoji}`, 540, 920);
     ctx.fillStyle = "#FFF8F0";
-    ctx.font = "italic 38px Georgia, serif";
+    ctx.font = "38px Georgia, serif";
     ctx.fillText(`"${top2.tagline}"`, 540, 995);
 
     // Decorative line
@@ -177,13 +177,13 @@ const ResultsPage = ({ results, firstName, onRetake, resultId }: ResultsPageProp
             <h2 className="text-2xl sm:text-3xl font-heading font-bold mb-1">
               {arch.title} {arch.emoji}
             </h2>
-            <p className="text-primary font-heading font-semibold italic text-sm sm:text-base mb-1">
+            <p className="text-primary font-heading font-semibold text-sm sm:text-base mb-1">
               "{arch.tagline}"
             </p>
             <p className="text-sm font-body text-card-foreground/60 uppercase tracking-wider mb-4">
               {arch.name}
             </p>
-            <blockquote className="border-l-2 border-primary pl-4 mb-4 italic font-heading text-sm sm:text-base text-card-foreground/80">
+            <blockquote className="border-l-2 border-primary pl-4 mb-4 font-heading font-medium text-sm sm:text-base text-card-foreground/80">
               "{arch.quote}"
             </blockquote>
             <p className="font-body text-sm sm:text-base leading-relaxed text-card-foreground/90 mb-4">
@@ -212,7 +212,9 @@ const ResultsPage = ({ results, firstName, onRetake, resultId }: ResultsPageProp
               <div key={category}>
                 <button
                   onClick={() => {
-                    if (!isTopTwo) setExpandedCategory(isExpanded ? null : category);
+                    if (window.matchMedia('(hover: hover)').matches && !isTopTwo) {
+                      setExpandedCategory(isExpanded ? null : category);
+                    }
                   }}
                   className="w-full text-left"
                 >
@@ -221,7 +223,7 @@ const ResultsPage = ({ results, firstName, onRetake, resultId }: ResultsPageProp
                       {arch.title} {arch.emoji}
                     </span>
                   </div>
-                  <p className="font-heading italic text-xs text-muted-foreground mb-1.5">
+                  <p className="font-heading text-xs text-muted-foreground mb-1.5">
                     "{arch.tagline}"
                   </p>
                   <div className="flex items-center gap-2">
