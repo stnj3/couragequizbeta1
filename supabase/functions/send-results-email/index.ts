@@ -95,7 +95,10 @@ serve(async (req) => {
     const minScore = Math.min(...scoreValues);
     const scoreRange = maxScore - minScore || 1;
 
-    const scoreBarsHtml = categoryOrder.map(cat => {
+    // Sort categories by score descending
+    const sortedCategories = [...categoryOrder].sort((a, b) => (scores?.[b] || 0) - (scores?.[a] || 0));
+
+    const scoreBarsHtml = sortedCategories.map(cat => {
       const arch = archetypes[cat];
       const score = scores?.[cat] || 0;
       const barPercent = Math.round(20 + ((score - minScore) / scoreRange) * 80);
@@ -193,10 +196,11 @@ serve(async (req) => {
             </td>
           </tr>
 
-          <!-- CTA Button -->
+          <!-- Share Section -->
           <tr>
             <td align="center" style="padding-bottom:40px;">
-              <a href="${resultsUrl}" style="display:inline-block;background-color:#d4a574;color:#0e0e0e;font-size:16px;font-weight:600;text-decoration:none;padding:14px 32px;border-radius:8px;">View Your Results</a>
+              <p style="color:#c4bfb4;font-size:16px;margin:0 0 16px 0;">Know someone who'd take this?</p>
+              <a href="${resultsUrl}" style="display:inline-block;background-color:#1a2332;color:#ffffff;font-size:16px;font-weight:600;text-decoration:none;padding:14px 32px;border-radius:8px;">Share Your Profile</a>
             </td>
           </tr>
 
