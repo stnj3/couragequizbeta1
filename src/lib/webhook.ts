@@ -27,6 +27,22 @@ export async function sendToWebhook(data: QuizSubmission): Promise<string | null
       return null;
     }
     console.log("Quiz submission saved to database");
+
+    // Send results email (fire-and-forget)
+    try {
+      await supabase.functions.invoke("send-results-email", {
+        body: {
+          firstName: data.firstName,
+          email: data.email,
+          topTwo: data.topTwo.map(([name]) => name),
+          resultId: inserted?.result_id,
+        },
+      });
+      console.log("Results email sent");
+    } catch (emailErr) {
+      console.error("Email send failed:", emailErr);
+    }
+
     return inserted?.result_id ?? null;
   } catch (err) {
     console.error("Error saving submission:", err);
