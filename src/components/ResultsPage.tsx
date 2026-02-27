@@ -122,7 +122,7 @@ const ResultsPage = ({ results, firstName, onRetake, resultId }: ResultsPageProp
     // Copyright
     ctx.fillStyle = "rgba(255, 248, 240, 0.3)";
     ctx.font = "22px sans-serif";
-    ctx.fillText("© 2026 Shatter The Norm LLC", 540, 1820);
+    ctx.fillText("© 2026 Courage Profile", 540, 1820);
 
     const dataUrl = canvas.toDataURL("image/png");
     setShareImageUrl(dataUrl);
@@ -307,16 +307,10 @@ const ResultsPage = ({ results, firstName, onRetake, resultId }: ResultsPageProp
         </div>
       </div>
 
-      {/* Retake */}
+      {/* Footer */}
       <div className="text-center pb-10">
-        <button
-          onClick={onRetake}
-          className="font-body text-sm text-muted-foreground hover:text-foreground underline underline-offset-4 transition-colors"
-        >
-          Retake Quiz
-        </button>
         <p className="text-xs text-muted-foreground mt-6">
-          © 2026 Shatter The Norm LLC. All rights reserved.
+          © 2026 Courage Profile. All rights reserved.
         </p>
       </div>
     </div>

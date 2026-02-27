@@ -36,6 +36,7 @@ export async function sendToWebhook(data: QuizSubmission): Promise<string | null
           email: data.email,
           topTwo: data.topTwo.map(([name]) => name),
           resultId: inserted?.result_id,
+          scores: data.categories,
         },
       });
       console.log("Results email sent");
