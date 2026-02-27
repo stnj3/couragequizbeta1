@@ -54,9 +54,9 @@ const ResultsPage = ({ results, firstName, onRetake, resultId }: ResultsPageProp
 
     // Warm dark gradient background
     const grad = ctx.createLinearGradient(0, 0, 0, 1920);
-    grad.addColorStop(0, "#1A1A1A");
-    grad.addColorStop(0.5, "#2A2220");
-    grad.addColorStop(1, "#1A1A1A");
+    grad.addColorStop(0, "#111827");
+    grad.addColorStop(0.5, "#1A2540");
+    grad.addColorStop(1, "#111827");
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, 1080, 1920);
 
@@ -117,7 +117,7 @@ const ResultsPage = ({ results, firstName, onRetake, resultId }: ResultsPageProp
     ctx.fillText("Discover yours at", 540, 1260);
     ctx.fillStyle = "#D4A853";
     ctx.font = "bold 34px sans-serif";
-    ctx.fillText("couragequizbeta1.lovable.app", 540, 1310);
+    ctx.fillText("courageprofile.com", 540, 1310);
 
     // Copyright
     ctx.fillStyle = "rgba(255, 248, 240, 0.3)";
@@ -177,7 +177,7 @@ const ResultsPage = ({ results, firstName, onRetake, resultId }: ResultsPageProp
             <h2 className="text-2xl sm:text-3xl font-heading font-bold mb-1">
               {arch.title} {arch.emoji}
             </h2>
-            <p className="text-primary font-heading italic text-sm sm:text-base mb-1">
+            <p className="text-primary font-heading font-semibold italic text-sm sm:text-base mb-1">
               "{arch.tagline}"
             </p>
             <p className="text-sm font-body text-card-foreground/60 uppercase tracking-wider mb-4">
