@@ -1,23 +1,25 @@
 import { useState } from "react";
 
 interface EmailCaptureProps {
-  onSubmit: (firstName: string, email: string) => void;
+  onSubmit: (firstName: string, email: string, purpose: string) => void;
 }
 
 const EmailCapture = ({ onSubmit }: EmailCaptureProps) => {
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
-  const [errors, setErrors] = useState<{ name?: string; email?: string }>({});
+  const [purpose, setPurpose] = useState("");
+  const [errors, setErrors] = useState<{ name?: string; email?: string; purpose?: string }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validate = () => {
-    const newErrors: { name?: string; email?: string } = {};
+    const newErrors: { name?: string; email?: string; purpose?: string } = {};
     if (!firstName.trim()) newErrors.name = "Name is required";
     if (!email.trim()) {
       newErrors.email = "Email is required";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       newErrors.email = "Please enter a valid email";
     }
+    if (!purpose) newErrors.purpose = "Please select one";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -29,7 +31,7 @@ const EmailCapture = ({ onSubmit }: EmailCaptureProps) => {
     console.log("Email captured:", { firstName, email });
     // Simulate brief loading for transition effect
     await new Promise((r) => setTimeout(r, 800));
-    onSubmit(firstName.trim(), email.trim());
+    onSubmit(firstName.trim(), email.trim(), purpose);
   };
 
   return (
@@ -75,6 +77,35 @@ const EmailCapture = ({ onSubmit }: EmailCaptureProps) => {
             />
             {errors.email && (
               <p className="text-destructive text-xs mt-1">{errors.email}</p>
+            )}
+          </div>
+
+          <div>
+            <label className="block text-sm font-body font-medium mb-2 text-foreground">
+              What best describes your interest?
+            </label>
+            <div className="space-y-2">
+              {[
+                { value: "personal", label: "Exploring for myself" },
+                { value: "team", label: "Exploring for my team or organization" },
+                { value: "both", label: "Both" },
+              ].map((option) => (
+                <button
+                  key={option.value}
+                  type="button"
+                  onClick={() => setPurpose(option.value)}
+                  className={`w-full text-left rounded-lg px-4 py-3 text-sm font-body transition-all duration-200 border ${
+                    purpose === option.value
+                      ? "bg-primary/15 border-primary text-foreground"
+                      : "bg-muted/60 border-border text-muted-foreground [@media(hover:hover)]:hover:bg-muted [@media(hover:hover)]:hover:text-foreground"
+                  }`}
+                >
+                  {option.label}
+                </button>
+              ))}
+            </div>
+            {errors.purpose && (
+              <p className="text-destructive text-xs mt-1">{errors.purpose}</p>
             )}
           </div>
 

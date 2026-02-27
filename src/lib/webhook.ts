@@ -4,6 +4,7 @@ export interface QuizSubmission {
   id: string;
   firstName: string;
   email: string;
+  purpose: string;
   answers: Record<number, number>;
   categories: Record<string, number>;
   topTwo: [string, number][];
@@ -15,6 +16,7 @@ export async function sendToWebhook(data: QuizSubmission): Promise<string | null
     const { data: inserted, error } = await supabase.from("quiz_submissions").insert({
       first_name: data.firstName,
       email: data.email,
+      purpose: data.purpose,
       raw_scores: data.categories,
       top_two_archetypes: data.topTwo.map(([name]) => name),
       answers: data.answers,
