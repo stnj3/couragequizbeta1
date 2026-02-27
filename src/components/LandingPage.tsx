@@ -16,12 +16,12 @@ const LandingPage = ({ onBegin }: { onBegin: () => void }) => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-6 py-12 animate-fade-in-up relative overflow-hidden"
       style={{
-        background: "linear-gradient(165deg, hsl(30 10% 8%) 0%, hsl(25 15% 12%) 40%, hsl(35 20% 14%) 70%, hsl(30 10% 10%) 100%)"
+        background: "linear-gradient(165deg, hsl(222 35% 8%) 0%, hsl(222 30% 12%) 40%, hsl(220 25% 14%) 70%, hsl(222 35% 9%) 100%)"
       }}
     >
       {/* Subtle gold radial glow */}
       <div className="absolute inset-0 pointer-events-none" style={{
-        background: "radial-gradient(ellipse 60% 40% at 50% 30%, hsla(40,55%,58%,0.08) 0%, transparent 70%)"
+        background: "radial-gradient(ellipse 60% 40% at 50% 30%, hsla(40,55%,58%,0.10) 0%, transparent 70%)"
       }} />
 
       <div className="max-w-xl w-full text-center space-y-8 relative z-10">
@@ -38,7 +38,7 @@ const LandingPage = ({ onBegin }: { onBegin: () => void }) => {
           A 3-minute assessment that reveals how you show up when it matters most.
         </p>
 
-        <p className="text-base sm:text-lg leading-relaxed max-w-md mx-auto" style={{ color: "hsl(30 20% 65%)" }}>
+        <p className="text-base sm:text-lg leading-relaxed max-w-md mx-auto" style={{ color: "hsl(220 15% 68%)" }}>
           There are six types of courage — and you naturally lead with two. This quiz maps your unique courage archetypes based on how you actually move through uncertainty, not how you think you should.
         </p>
 
@@ -57,12 +57,12 @@ const LandingPage = ({ onBegin }: { onBegin: () => void }) => {
         </button>
 
         {count !== null && (
-          <p className="text-sm font-body" style={{ color: "hsl(40 55% 58% / 0.7)" }}>
+          <p className="text-sm font-body" style={{ color: "hsl(40 55% 58% / 0.85)" }}>
             Join {count.toLocaleString()} people who've discovered their Courage Archetypes.
           </p>
         )}
 
-        <p className="text-xs pt-4" style={{ color: "hsl(30 20% 45%)" }}>
+        <p className="text-xs pt-4" style={{ color: "hsl(220 15% 50%)" }}>
           © 2026 Shatter The Norm LLC. All rights reserved.
         </p>
       </div>
