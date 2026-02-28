@@ -42,7 +42,7 @@ const LandingPage = ({ onBegin }: { onBegin: () => void }) => {
         </p>
 
         <p className="text-base sm:text-lg leading-relaxed max-w-md mx-auto" style={{ color: "hsl(220 15% 68%)" }}>
-          There are six types of courage — and you naturally lead with two. This quiz maps your unique courage archetypes based on which types of courage come most naturally to you, not how you think you should show up.
+          Courage drives how you decide, speak up, and act when the outcome isn't guaranteed. This 5-minute assessment reveals your primary Courage Archetypes, giving you clear insight into how you navigate uncertainty and where you're most effective. Understand your pattern. Move with intention.
         </p>
 
         <button

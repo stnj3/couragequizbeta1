@@ -81,10 +81,10 @@ const EmailCapture = ({ onSubmit }: EmailCaptureProps) => {
           </div>
 
           <div>
-            <label className="block text-sm font-body font-medium mb-2 text-foreground">
+            <label className="block text-sm font-body font-medium mb-2 text-foreground text-center">
               What best describes your interest?
             </label>
-            <div className="space-y-2">
+            <div className="flex flex-col items-center gap-2">
               {[
                 { value: "personal", label: "Exploring for myself" },
                 { value: "team", label: "Exploring for my team or organization" },
@@ -94,7 +94,7 @@ const EmailCapture = ({ onSubmit }: EmailCaptureProps) => {
                   key={option.value}
                   type="button"
                   onClick={() => setPurpose(option.value)}
-                  className={`w-full text-left rounded-lg px-4 py-3 text-sm font-body transition-all duration-200 border ${
+                  className={`rounded-lg px-6 py-3 text-sm font-body transition-all duration-200 border ${
                     purpose === option.value
                       ? "bg-primary/15 border-primary text-foreground"
                       : "bg-muted/60 border-border text-muted-foreground [@media(hover:hover)]:hover:bg-muted [@media(hover:hover)]:hover:text-foreground"
