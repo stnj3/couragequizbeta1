@@ -75,7 +75,7 @@ serve(async (req) => {
   }
 
   try {
-    const { firstName, email, topTwo, resultId, scores } = await req.json();
+    const { firstName, email, topTwo, resultId, scores, answers } = await req.json();
 
     const arch1 = archetypes[topTwo[0]];
     const arch2 = archetypes[topTwo[1]];
@@ -95,8 +95,40 @@ serve(async (req) => {
     const minScore = Math.min(...scoreValues);
     const scoreRange = maxScore - minScore || 1;
 
-    // Sort categories by score descending
-    const sortedCategories = [...categoryOrder].sort((a, b) => (scores?.[b] || 0) - (scores?.[a] || 0));
+    // Compute max single response per category for tie-breaking
+    const categoryMaxResponse: Record<string, number> = {};
+    for (const cat of categoryOrder) {
+      categoryMaxResponse[cat] = 0;
+    }
+    if (answers) {
+    // Questions category mapping (mirrors src/data/questions.ts)
+    const questionCategories = [
+      "Physical Courage", "Social Courage", "Moral Courage", "Emotional Courage", "Intellectual Courage", "Spiritual Courage",
+      "Physical Courage", "Social Courage", "Moral Courage", "Emotional Courage", "Intellectual Courage", "Spiritual Courage",
+      "Physical Courage", "Social Courage", "Moral Courage", "Emotional Courage", "Intellectual Courage", "Spiritual Courage",
+      "Physical Courage", "Social Courage", "Moral Courage", "Emotional Courage", "Intellectual Courage", "Spiritual Courage",
+      "Physical Courage", "Social Courage", "Moral Courage", "Emotional Courage", "Intellectual Courage", "Spiritual Courage",
+      "Physical Courage", "Social Courage", "Moral Courage", "Emotional Courage", "Intellectual Courage", "Spiritual Courage",
+      "Physical Courage", "Social Courage", "Moral Courage", "Emotional Courage", "Intellectual Courage", "Spiritual Courage",
+    ];
+    for (const [idx, val] of Object.entries(answers)) {
+      const cat = questionCategories[Number(idx)];
+      if (cat && Number(val) > (categoryMaxResponse[cat] || 0)) {
+        categoryMaxResponse[cat] = Number(val);
+      }
+    }
+    }
+
+    // Sort categories by score desc, then by highest single response desc, then alphabetically
+    const sortedCategories = [...categoryOrder].sort((a, b) => {
+      const scoreA = scores?.[a] || 0;
+      const scoreB = scores?.[b] || 0;
+      if (scoreB !== scoreA) return scoreB - scoreA;
+      const maxA = categoryMaxResponse[a] || 0;
+      const maxB = categoryMaxResponse[b] || 0;
+      if (maxB !== maxA) return maxB - maxA;
+      return a.localeCompare(b);
+    });
 
     const scoreBarsHtml = sortedCategories.map(cat => {
       const arch = archetypes[cat];

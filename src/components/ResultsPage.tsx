@@ -257,13 +257,6 @@ const ResultsPage = ({ results, firstName, onRetake, resultId }: ResultsPageProp
       {/* ── Share Section ── */}
       <div className="mt-20 mb-10">
         <div className="w-full h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent mb-10" />
-        <h3 className="text-2xl sm:text-3xl font-heading font-bold text-center mb-3">
-          Courage is better together.
-        </h3>
-        <p className="text-center text-muted-foreground font-body text-base mb-10">
-          Send the quiz to someone you lead with, work with, or live with.
-        </p>
-
         {/* Share Card Preview */}
         {shareImageUrl && (
           <div className="flex justify-center mb-3">
@@ -278,6 +271,13 @@ const ResultsPage = ({ results, firstName, onRetake, resultId }: ResultsPageProp
         )}
         <p className="text-center text-xs text-muted-foreground/60 font-body mb-6 sm:hidden">
           Hold to save to your photos 📲
+        </p>
+
+        <h3 className="text-2xl sm:text-3xl font-heading font-bold text-center mb-3">
+          Courage is better together.
+        </h3>
+        <p className="text-center text-muted-foreground font-body text-base mb-10">
+          Send the quiz to someone you lead with, work with, or live with.
         </p>
 
         <div className="flex flex-wrap justify-center gap-3">
