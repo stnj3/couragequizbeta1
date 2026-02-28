@@ -103,15 +103,15 @@ serve(async (req) => {
       const score = scores?.[cat] || 0;
       const barPercent = Math.round(20 + ((score - minScore) / scoreRange) * 80);
       const isTopTwo = topTwo.includes(cat);
-      const barColor = isTopTwo ? "#D4A853" : "#1A6B5C";
+      const barColor = isTopTwo ? "#C9963B" : "#1A6B5C";
 
       return `
         <tr>
           <td style="padding:6px 0;">
-            <p style="color:#c4bfb4;font-size:13px;margin:0 0 4px 0;">${arch.emoji} ${arch.title}</p>
+            <p style="color:#1e2a4a;font-size:13px;margin:0 0 4px 0;font-weight:${isTopTwo ? '600' : '400'};">${arch.emoji} ${arch.title}</p>
             <table width="100%" cellpadding="0" cellspacing="0">
               <tr>
-                <td style="background-color:#2a2a2a;border-radius:4px;">
+                <td style="background-color:#e8e4de;border-radius:4px;">
                   <div style="background-color:${barColor};height:12px;border-radius:4px;width:${barPercent}%;"></div>
                 </td>
               </tr>
@@ -122,13 +122,13 @@ serve(async (req) => {
 
     // Build archetype card HTML helper
     const archCard = (arch: ArchetypeInfo) => `
-      <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#1a1a1a;border-radius:12px;border:1px solid #2a2a2a;">
+      <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border-radius:12px;border:1px solid #e0dbd3;">
         <tr>
           <td style="padding:28px;">
-            <h2 style="color:#f5f0e8;font-size:22px;font-weight:600;margin:0 0 6px 0;">${arch.emoji} ${arch.title}</h2>
-            <p style="color:#d4a574;font-size:14px;font-style:italic;margin:0 0 12px 0;">${arch.tagline}</p>
-            <p style="color:#c4bfb4;font-size:15px;line-height:1.6;margin:0 0 14px 0;">${arch.description}</p>
-            <p style="color:#999;font-size:13px;line-height:1.5;margin:0;"><strong style="color:#c4bfb4;">Watch for:</strong> ${arch.watchFor}</p>
+            <h2 style="color:#1e2a4a;font-size:22px;font-weight:600;margin:0 0 6px 0;">${arch.emoji} ${arch.title}</h2>
+            <p style="color:#C9963B;font-size:14px;font-style:italic;margin:0 0 12px 0;">${arch.tagline}</p>
+            <p style="color:#3a3a3a;font-size:15px;line-height:1.6;margin:0 0 14px 0;">${arch.description}</p>
+            <p style="color:#666;font-size:13px;line-height:1.5;margin:0;"><strong style="color:#1e2a4a;">Watch for:</strong> ${arch.watchFor}</p>
           </td>
         </tr>
       </table>`;
@@ -139,8 +139,8 @@ serve(async (req) => {
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
-<body style="margin:0;padding:0;background-color:#0e0e0e;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#0e0e0e;">
+<body style="margin:0;padding:0;background-color:#faf9f6;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#faf9f6;">
     <tr>
       <td align="center" style="padding:40px 20px;">
         <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
@@ -148,14 +148,14 @@ serve(async (req) => {
           <!-- Header -->
           <tr>
             <td align="center" style="padding-bottom:32px;">
-              <h1 style="color:#f5f0e8;font-size:28px;font-weight:700;margin:0;letter-spacing:-0.5px;">Your Courage Archetypes</h1>
+              <h1 style="color:#1e2a4a;font-size:28px;font-weight:700;margin:0;letter-spacing:-0.5px;">Your Courage Archetypes</h1>
             </td>
           </tr>
 
           <!-- Intro -->
           <tr>
             <td align="center" style="padding-bottom:32px;">
-              <p style="color:#c4bfb4;font-size:18px;margin:0;">${firstName}, here's what we found.</p>
+              <p style="color:#3a3a3a;font-size:18px;margin:0;">${firstName}, here's what we found.</p>
             </td>
           </tr>
 
@@ -169,7 +169,7 @@ serve(async (req) => {
           <!-- Plus sign -->
           <tr>
             <td align="center" style="padding-bottom:16px;">
-              <span style="color:#d4a574;font-size:24px;font-weight:300;">+</span>
+              <span style="color:#C9963B;font-size:24px;font-weight:300;">+</span>
             </td>
           </tr>
 
@@ -183,10 +183,10 @@ serve(async (req) => {
           <!-- Full Courage Profile -->
           <tr>
             <td style="padding-bottom:32px;">
-              <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#1a1a1a;border-radius:12px;border:1px solid #2a2a2a;">
+              <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border-radius:12px;border:1px solid #e0dbd3;">
                 <tr>
                   <td style="padding:28px;">
-                    <h3 style="color:#f5f0e8;font-size:18px;font-weight:600;margin:0 0 16px 0;">Full Courage Profile</h3>
+                    <h3 style="color:#1e2a4a;font-size:18px;font-weight:600;margin:0 0 16px 0;">Full Courage Profile</h3>
                     <table width="100%" cellpadding="0" cellspacing="0">
                       ${scoreBarsHtml}
                     </table>
@@ -199,16 +199,17 @@ serve(async (req) => {
           <!-- Share Section -->
           <tr>
             <td align="center" style="padding-bottom:40px;">
-              <p style="color:#c4bfb4;font-size:16px;margin:0 0 16px 0;">Know someone who'd take this?</p>
-              <a href="${resultsUrl}" style="display:inline-block;background-color:#1a2332;color:#ffffff;font-size:16px;font-weight:600;text-decoration:none;padding:14px 32px;border-radius:8px;">Share Your Profile</a>
+              <h3 style="color:#1e2a4a;font-size:20px;font-weight:600;margin:0 0 8px 0;">Courage is better together.</h3>
+              <p style="color:#555;font-size:15px;margin:0 0 20px 0;">Share the quiz with someone you lead with, work with, or live with.</p>
+              <a href="https://courageprofile.com" style="display:inline-block;background-color:#1e2a4a;color:#ffffff;font-size:16px;font-weight:600;text-decoration:none;padding:14px 32px;border-radius:8px;">Share the Quiz</a>
             </td>
           </tr>
 
           <!-- Footer -->
           <tr>
-            <td align="center" style="border-top:1px solid #2a2a2a;padding-top:24px;">
-              <p style="color:#666;font-size:13px;margin:0 0 8px 0;">© 2026 Courage Profile. All rights reserved.</p>
-              <a href="https://courageprofile.com" style="color:#d4a574;font-size:13px;text-decoration:none;">courageprofile.com</a>
+            <td align="center" style="border-top:1px solid #e0dbd3;padding-top:24px;">
+              <p style="color:#999;font-size:13px;margin:0 0 8px 0;">© 2026 Courage Profile. All rights reserved.</p>
+              <a href="https://courageprofile.com" style="color:#C9963B;font-size:13px;text-decoration:none;">courageprofile.com</a>
             </td>
           </tr>
 
