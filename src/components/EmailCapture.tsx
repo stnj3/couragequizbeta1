@@ -94,10 +94,10 @@ const EmailCapture = ({ onSubmit }: EmailCaptureProps) => {
                   key={option.value}
                   type="button"
                   onClick={() => setPurpose(option.value)}
-                  className={`rounded-lg px-6 py-3 text-sm font-body transition-all duration-200 border ${
+                  className={`w-[300px] rounded-lg px-6 py-3 text-sm font-body transition-all duration-200 ${
                     purpose === option.value
-                      ? "bg-primary/15 border-primary text-foreground"
-                      : "bg-muted/60 border-border text-muted-foreground [@media(hover:hover)]:hover:bg-muted [@media(hover:hover)]:hover:text-foreground"
+                      ? "bg-primary/15 text-foreground border border-primary shadow-[0_0_8px_hsl(40_55%_55%/0.3)]"
+                      : "text-muted-foreground border border-[hsl(40_55%_55%/0.25)] shadow-[0_0_6px_hsl(40_55%_55%/0.1)] [@media(hover:hover)]:hover:border-[hsl(40_55%_55%/0.45)] [@media(hover:hover)]:hover:text-foreground"
                   }`}
                 >
                   {option.label}
