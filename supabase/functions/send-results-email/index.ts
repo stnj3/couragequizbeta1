@@ -200,8 +200,8 @@ serve(async (req) => {
           <tr>
             <td align="center" style="padding-bottom:40px;">
               <h3 style="color:#1e2a4a;font-size:20px;font-weight:600;margin:0 0 8px 0;">Courage is better together.</h3>
-              <p style="color:#555;font-size:15px;margin:0 0 20px 0;">Share the quiz with someone you lead with, work with, or live with.</p>
-              <a href="https://courageprofile.com" style="display:inline-block;background-color:#1e2a4a;color:#ffffff;font-size:16px;font-weight:600;text-decoration:none;padding:14px 32px;border-radius:8px;">Share the Quiz</a>
+              <p style="color:#555;font-size:15px;margin:0 0 20px 0;">Send the quiz to someone you lead with, work with, or live with.</p>
+              <a href="mailto:?subject=${encodeURIComponent("I just took this and thought of you...")}&body=${encodeURIComponent("I just discovered my Courage Archetypes — it's a 5-minute quiz that shows which types of courage come most naturally to you. Take it here: https://courageprofile.com")}" style="display:inline-block;background-color:#1e2a4a;color:#ffffff;font-size:16px;font-weight:600;text-decoration:none;padding:14px 32px;border-radius:8px;">Share the Quiz</a>
             </td>
           </tr>
 
