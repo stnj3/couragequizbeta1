@@ -38,11 +38,11 @@ const LandingPage = ({ onBegin }: { onBegin: () => void }) => {
         </h1>
 
         <p className="text-lg sm:text-xl text-primary font-heading font-semibold">
-          A 5-minute assessment that reveals how you show up when it matters most.
+          A 5-minute assessment that reveals which types of courage come most naturally to you.
         </p>
 
         <p className="text-base sm:text-lg leading-relaxed max-w-md mx-auto" style={{ color: "hsl(220 15% 68%)" }}>
-          There are six types of courage — and you naturally lead with two. This quiz maps your unique courage archetypes based on how you actually move through uncertainty, not how you think you should.
+          There are six types of courage — and you naturally lead with two. This quiz maps your unique courage archetypes based on which types of courage come most naturally to you, not how you think you should show up.
         </p>
 
         <button

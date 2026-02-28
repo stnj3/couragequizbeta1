@@ -257,9 +257,12 @@ const ResultsPage = ({ results, firstName, onRetake, resultId }: ResultsPageProp
       {/* ── Share Section ── */}
       <div className="mt-20 mb-10">
         <div className="w-full h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent mb-10" />
-        <h3 className="text-2xl sm:text-3xl font-heading font-bold text-center mb-10">
-          Share Your Results
+        <h3 className="text-2xl sm:text-3xl font-heading font-bold text-center mb-3">
+          Courage is better together.
         </h3>
+        <p className="text-center text-muted-foreground font-body text-base mb-10">
+          Send the quiz to someone you lead with, work with, or live with.
+        </p>
 
         {/* Share Card Preview */}
         {shareImageUrl && (
