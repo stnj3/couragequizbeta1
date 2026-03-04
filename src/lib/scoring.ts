@@ -15,7 +15,7 @@ export function calculateScores(answers: Record<number, number>): ScoreResult {
     "Moral Courage": 0,
     "Social Courage": 0,
     "Intellectual Courage": 0,
-    "Spiritual Courage": 0,
+    "Existential Courage": 0,
   };
 
   // Track max single-question response per category for tie-breaking
@@ -25,7 +25,7 @@ export function calculateScores(answers: Record<number, number>): ScoreResult {
     "Moral Courage": 0,
     "Social Courage": 0,
     "Intellectual Courage": 0,
-    "Spiritual Courage": 0,
+    "Existential Courage": 0,
   };
 
   questions.forEach((question, index) => {

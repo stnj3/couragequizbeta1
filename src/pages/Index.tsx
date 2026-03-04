@@ -17,7 +17,7 @@ const Index = () => {
   const [quizKey, setQuizKey] = useState(0);
 
   const shuffledIndices = useMemo(() => {
-    const indices = Array.from({ length: 42 }, (_, i) => i);
+    const indices = Array.from({ length: 36 }, (_, i) => i);
     for (let i = indices.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [indices[i], indices[j]] = [indices[j], indices[i]];

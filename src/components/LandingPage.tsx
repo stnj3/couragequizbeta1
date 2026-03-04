@@ -38,7 +38,7 @@ const LandingPage = ({ onBegin }: { onBegin: () => void }) => {
         </h1>
 
         <p className="text-lg sm:text-xl text-primary font-heading font-semibold">
-          A 5-minute assessment that reveals which types of courage come most naturally to you.
+          A 5 minute quiz that reveals which types of courage come most naturally to you.
         </p>
 
         <p className="text-base sm:text-lg leading-relaxed max-w-md mx-auto" style={{ color: "hsl(220 15% 68%)" }}>

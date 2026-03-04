@@ -55,6 +55,11 @@ const QuizPage = ({ answers, onAnswer, onComplete, shuffledIndices }: QuizPagePr
       <ProgressBar currentPage={currentPage + 1} totalPages={TOTAL_PAGES} />
 
       <div className="flex-1 px-4 sm:px-6 py-6 max-w-2xl mx-auto w-full animate-fade-in">
+        {currentPage === 0 && (
+          <p className="font-body text-sm sm:text-base text-muted-foreground leading-relaxed mb-8 text-center max-w-lg mx-auto">
+            There are no right or wrong answers. This measures where your courage naturally shows up, not how much you have. Everyone leads with some types more than others.
+          </p>
+        )}
         <div className="space-y-8 stagger-children">
           {pageIndices.map((globalIndex, i) => {
             const q = questions[globalIndex];

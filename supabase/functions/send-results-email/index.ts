@@ -15,43 +15,43 @@ const archetypes: Record<string, ArchetypeInfo> = {
     title: "The Lion",
     emoji: "🦁",
     tagline: "Move first. Adjust later.",
-    description: "You possess remarkable resilience when facing physical challenges. Like the lion, you confront threats head-on, using your strength and protective instincts to defend yourself and those around you.",
-    watchFor: "You may normalize pain, disappear into doing, or over-identify with being the one who can handle it.",
+    description: "You don't wait for the fear to pass before you act. Whether it's something small like handling the spider on the wall or something big like stepping into a confrontation, your courage lives in your body. You stay present when pressure hits and keep moving when others freeze.",
+    watchFor: "Pushing through pain or exhaustion as a habit, not a choice. Sometimes the courageous move is knowing when to stop.",
   },
   "Emotional Courage": {
     title: "The Octopus",
     emoji: "🐙",
     tagline: "Feel it before you fix it.",
-    description: "You are open and honest with your emotions, willing to be vulnerable and face difficult feelings in order to grow. Like the octopus, you navigate emotional depths and reveal your true self.",
-    watchFor: "You may overexpose without grounding, hold emotional weight that isn't yours, or confuse expression with resolution.",
+    description: "You stay with difficult emotions when most people would numb out, distract, or move on too fast. You ask for what you want knowing the answer might be no. You end what isn't working even when what comes next is uncertain. Your courage is in your willingness to be emotionally honest, with yourself and with others.",
+    watchFor: "Sitting with feelings so long that the moment to act passes you by. You can honor the emotion and still move forward.",
   },
   "Moral Courage": {
     title: "The Wolf",
     emoji: "🐺",
-    tagline: "Hold the line, even alone.",
-    description: "You have a strong sense of right and wrong and are unafraid to defend your principles, even when it comes at a personal cost. Like the wolf, you live by an inner code.",
-    watchFor: "You may become inflexible, isolate instead of engaging disagreement, or carry moral weight alone and silently.",
+    tagline: "Right is right, even when it's expensive.",
+    description: "You live by an inner code and you act on it in both directions. You'll refuse what's wrong and you'll champion what's right, whether anyone's watching or not. You're the one advocating for the person who deserves the promotion, and the one saying no to the deal that doesn't sit right.",
+    watchFor: "Holding the line so tightly that you forget to let others in. Your code works best when it has room to breathe.",
   },
   "Social Courage": {
     title: "The Dolphin",
     emoji: "🐬",
-    tagline: "Go toward people, not away.",
-    description: "Your confidence in social settings allows you to stand up for yourself and others, even when it means going against the crowd. Like the dolphin, you navigate social dynamics with relational intelligence.",
-    watchFor: "You may take on social risks others aren't ready for, over-share for connection, or speak before sensing the space.",
+    tagline: "Show up real, even in a crowded room.",
+    description: "You choose authenticity when it would be easier to perform. In group settings, in new rooms, in front of people with more status, you say what you actually think and show up as who you actually are. Your courage lives in the social field, where the risk is how people see you.",
+    watchFor: "Saying the hard thing out of habit when the room might need something softer. Your honesty hits harder when it's timed well.",
   },
   "Intellectual Courage": {
     title: "The Owl",
     emoji: "🦉",
     tagline: "Question everything, including yourself.",
-    description: "You are eager to challenge your beliefs and explore new ideas, embracing uncertainty as an opportunity to grow. Like the owl, you seek understanding even in the dark.",
-    watchFor: "You may stay in the abstract to avoid emotional risk, stall action for more information, or appear overly contrarian.",
+    description: "You're willing to say \"I don't know\" and mean it. You seek out ideas that challenge your thinking, not just ones that confirm it. When you're wrong, you update. When something is complex, you resist the urge to force a simple answer. Your courage lives in your relationship with your own mind.",
+    watchFor: "Staying in the question longer than you need to. Sometimes you already know enough to move.",
   },
-  "Spiritual Courage": {
+  "Existential Courage": {
     title: "The Butterfly",
     emoji: "🦋",
     tagline: "Trust the vision before the evidence arrives.",
-    description: "You remain grounded in purpose, values, or long-range vision especially when the path forward is unclear. Like the butterfly, you transform through life's challenges.",
-    watchFor: "You may default to abstract optimism when clarity is needed, under-communicate in crisis, or bypass hard conversations in favor of higher purpose.",
+    description: "You make moves that can't be fully explained yet. Career pivots, new ventures, life decisions that don't fit on a spreadsheet. You trust your sense of direction even when no one around you can see where it leads. Your courage is in your willingness to act without proof and build the road as you walk it.",
+    watchFor: "Reaching for the next leap before you've landed from the last one. Your vision gets stronger when you give it time to build.",
   },
 };
 
@@ -61,7 +61,7 @@ const categoryOrder = [
   "Moral Courage",
   "Social Courage",
   "Intellectual Courage",
-  "Spiritual Courage",
+  "Existential Courage",
 ];
 
 const corsHeaders = {
@@ -101,22 +101,21 @@ serve(async (req) => {
       categoryMaxResponse[cat] = 0;
     }
     if (answers) {
-    // Questions category mapping (mirrors src/data/questions.ts)
-    const questionCategories = [
-      "Physical Courage", "Social Courage", "Moral Courage", "Emotional Courage", "Intellectual Courage", "Spiritual Courage",
-      "Physical Courage", "Social Courage", "Moral Courage", "Emotional Courage", "Intellectual Courage", "Spiritual Courage",
-      "Physical Courage", "Social Courage", "Moral Courage", "Emotional Courage", "Intellectual Courage", "Spiritual Courage",
-      "Physical Courage", "Social Courage", "Moral Courage", "Emotional Courage", "Intellectual Courage", "Spiritual Courage",
-      "Physical Courage", "Social Courage", "Moral Courage", "Emotional Courage", "Intellectual Courage", "Spiritual Courage",
-      "Physical Courage", "Social Courage", "Moral Courage", "Emotional Courage", "Intellectual Courage", "Spiritual Courage",
-      "Physical Courage", "Social Courage", "Moral Courage", "Emotional Courage", "Intellectual Courage", "Spiritual Courage",
-    ];
-    for (const [idx, val] of Object.entries(answers)) {
-      const cat = questionCategories[Number(idx)];
-      if (cat && Number(val) > (categoryMaxResponse[cat] || 0)) {
-        categoryMaxResponse[cat] = Number(val);
+      // 36 questions: 6 per category, grouped by category
+      const questionCategories = [
+        ...Array(6).fill("Physical Courage"),
+        ...Array(6).fill("Moral Courage"),
+        ...Array(6).fill("Social Courage"),
+        ...Array(6).fill("Emotional Courage"),
+        ...Array(6).fill("Intellectual Courage"),
+        ...Array(6).fill("Existential Courage"),
+      ];
+      for (const [idx, val] of Object.entries(answers)) {
+        const cat = questionCategories[Number(idx)];
+        if (cat && Number(val) > (categoryMaxResponse[cat] || 0)) {
+          categoryMaxResponse[cat] = Number(val);
+        }
       }
-    }
     }
 
     // Sort categories by score desc, then by highest single response desc, then alphabetically
