@@ -177,11 +177,11 @@ const ResultsPage = ({ results, firstName, onRetake, resultId }: ResultsPageProp
             <h2 className="text-2xl sm:text-3xl font-heading font-bold mb-1">
               {arch.title} {arch.emoji}
             </h2>
-            <p className="text-primary font-heading font-semibold text-sm sm:text-base mb-1">
-              "{arch.tagline}"
-            </p>
-            <p className="text-sm font-body text-card-foreground/60 uppercase tracking-wider mb-4">
+            <p className="text-xs sm:text-sm font-body uppercase tracking-[0.15em] text-muted-foreground mb-1">
               {arch.name}
+            </p>
+            <p className="text-primary font-heading font-semibold text-sm sm:text-base mb-4">
+              "{arch.tagline}"
             </p>
             <blockquote className="border-l-2 border-primary pl-4 mb-4 font-heading font-medium text-sm sm:text-base text-card-foreground/80">
               "{arch.quote}"

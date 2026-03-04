@@ -156,7 +156,8 @@ serve(async (req) => {
       <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border-radius:12px;border:1px solid #e0dbd3;">
         <tr>
           <td style="padding:28px;">
-            <h2 style="color:#1e2a4a;font-size:22px;font-weight:600;margin:0 0 6px 0;">${arch.emoji} ${arch.title}</h2>
+            <h2 style="color:#1e2a4a;font-size:22px;font-weight:600;margin:0 0 4px 0;">${arch.emoji} ${arch.title}</h2>
+            <p style="color:#888;font-size:12px;text-transform:uppercase;letter-spacing:2px;margin:0 0 6px 0;">${cat}</p>
             <p style="color:#C9963B;font-size:14px;font-style:italic;margin:0 0 12px 0;">${arch.tagline}</p>
             <p style="color:#3a3a3a;font-size:15px;line-height:1.6;margin:0 0 14px 0;">${arch.description}</p>
             <p style="color:#666;font-size:13px;line-height:1.5;margin:0;"><strong style="color:#1e2a4a;">Watch for:</strong> ${arch.watchFor}</p>
