@@ -152,7 +152,7 @@ serve(async (req) => {
     }).join("");
 
     // Build archetype card HTML helper
-    const archCard = (arch: ArchetypeInfo) => `
+    const archCard = (arch: ArchetypeInfo, cat: string) => `
       <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border-radius:12px;border:1px solid #e0dbd3;">
         <tr>
           <td style="padding:28px;">
