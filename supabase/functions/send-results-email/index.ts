@@ -208,7 +208,7 @@ serve(async (req) => {
           <!-- Archetype 2 -->
           <tr>
             <td style="padding-bottom:32px;">
-              ${archCard(arch2)}
+              ${archCard(arch2, topTwo[1])}
             </td>
           </tr>
 
