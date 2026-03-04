@@ -5,7 +5,7 @@ interface LikertScaleProps {
   hasError: boolean;
 }
 
-const labels = ["Rarely", "Seldom", "Sometimes", "Often", "Almost Always"];
+const labels = ["Not Like Me", "A Little Like Me", "Somewhat Like Me", "Like Me", "Very Much Like Me"];
 
 const LikertScale = ({ questionIndex, value, onChange, hasError }: LikertScaleProps) => {
   return (
