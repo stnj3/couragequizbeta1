@@ -75,7 +75,7 @@ serve(async (req) => {
   }
 
   try {
-    const { firstName, email, topTwo, resultId, scores, answers } = await req.json();
+    const { firstName, email, purpose, topTwo, resultId, scores, answers } = await req.json();
 
     const arch1 = archetypes[topTwo[0]];
     const arch2 = archetypes[topTwo[1]];
@@ -224,9 +224,14 @@ serve(async (req) => {
           <!-- Share Section -->
           <tr>
             <td align="center" style="padding-bottom:40px;">
+              ${purpose === "team" || purpose === "both" ? `
+              <h3 style="color:#1e2a4a;font-size:20px;font-weight:600;margin:0 0 8px 0;">Bring this to your team.</h3>
+              <p style="color:#555;font-size:15px;margin:0 0 20px 0;">The Courage Profile works even better as a shared language. If you're interested in deploying this with your team, cohort, or organization, reply to this email and we'll show you how it works.</p>
+              ` : `
               <h3 style="color:#1e2a4a;font-size:20px;font-weight:600;margin:0 0 8px 0;">Courage is better together.</h3>
               <p style="color:#555;font-size:15px;margin:0 0 20px 0;">Send the quiz to someone you lead with, work with, or live with.</p>
               <a href="mailto:?subject=${encodeURIComponent("I just took this and thought of you...")}&body=${encodeURIComponent("I just discovered my Courage Archetypes — it's a 5-minute quiz that shows which types of courage come most naturally to you. Take it here: https://courageprofile.com")}" style="display:inline-block;background-color:#1e2a4a;color:#ffffff;font-size:16px;font-weight:600;text-decoration:none;padding:14px 32px;border-radius:8px;">Share the Quiz</a>
+              `}
             </td>
           </tr>
 
