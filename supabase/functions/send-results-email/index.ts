@@ -180,14 +180,14 @@ serve(async (req) => {
           <!-- Header -->
           <tr>
             <td align="center" style="padding-bottom:32px;">
-              <h1 style="color:#1e2a4a;font-size:28px;font-weight:700;margin:0;letter-spacing:-0.5px;">Your Courage Archetypes</h1>
+              <h1 style="color:#1e2a4a;font-size:28px;font-weight:700;margin:0;letter-spacing:-0.5px;">Your Courage Profile</h1>
             </td>
           </tr>
 
           <!-- Intro -->
           <tr>
             <td align="center" style="padding-bottom:32px;">
-              <p style="color:#3a3a3a;font-size:18px;margin:0;">${firstName}, here's what we found.</p>
+              <p style="color:#3a3a3a;font-size:18px;margin:0;">${firstName}, here's where your courage concentrates.</p>
             </td>
           </tr>
 
@@ -195,13 +195,6 @@ serve(async (req) => {
           <tr>
             <td style="padding-bottom:16px;">
               ${archCard(arch1, topTwo[0])}
-            </td>
-          </tr>
-
-          <!-- Plus sign -->
-          <tr>
-            <td align="center" style="padding-bottom:16px;">
-              <span style="color:#C9963B;font-size:24px;font-weight:300;">+</span>
             </td>
           </tr>
 
