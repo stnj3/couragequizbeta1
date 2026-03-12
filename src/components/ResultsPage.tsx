@@ -159,10 +159,10 @@ const ResultsPage = ({ results, firstName, onRetake, resultId }: ResultsPageProp
       {/* Header */}
       <div className="text-center mb-10">
         <p className="text-primary font-body font-medium text-sm uppercase tracking-widest mb-3">
-          {firstName}'s Courage Archetypes
+          YOUR COURAGE PROFILE
         </p>
         <h1 className="text-3xl sm:text-4xl font-heading font-bold mb-2">
-          Your Two Strongest Courage Types
+          {firstName}, here's where your courage concentrates.
         </h1>
       </div>
 

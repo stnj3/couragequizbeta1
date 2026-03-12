@@ -198,13 +198,6 @@ serve(async (req) => {
             </td>
           </tr>
 
-          <!-- Plus sign -->
-          <tr>
-            <td align="center" style="padding-bottom:16px;">
-              <span style="color:#C9963B;font-size:24px;font-weight:300;">+</span>
-            </td>
-          </tr>
-
           <!-- Archetype 2 -->
           <tr>
             <td style="padding-bottom:32px;">
