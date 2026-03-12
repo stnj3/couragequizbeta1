@@ -187,7 +187,7 @@ serve(async (req) => {
           <!-- Intro -->
           <tr>
             <td align="center" style="padding-bottom:32px;">
-              <p style="color:#3a3a3a;font-size:18px;margin:0;">${firstName}, here's what we found.</p>
+              <p style="color:#3a3a3a;font-size:18px;margin:0;">${firstName}, here's where your courage concentrates.</p>
             </td>
           </tr>
 
