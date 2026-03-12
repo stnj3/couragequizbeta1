@@ -75,7 +75,7 @@ serve(async (req) => {
   }
 
   try {
-    const { firstName, email, topTwo, resultId, scores, answers } = await req.json();
+    const { firstName, email, purpose, topTwo, resultId, scores, answers } = await req.json();
 
     const arch1 = archetypes[topTwo[0]];
     const arch2 = archetypes[topTwo[1]];
