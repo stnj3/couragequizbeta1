@@ -260,7 +260,7 @@ serve(async (req) => {
       },
       body: JSON.stringify({
         from: "Courage Profile <quiz@courageprofile.com>",
-        reply_to: "booking@jerrythe3rd.com",
+        reply_to: "quiz@courageprofile.com",
         to: [email],
         subject: `${firstName}, your Courage Archetypes are ready`,
         html,
