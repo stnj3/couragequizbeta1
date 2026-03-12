@@ -180,7 +180,7 @@ serve(async (req) => {
           <!-- Header -->
           <tr>
             <td align="center" style="padding-bottom:32px;">
-              <h1 style="color:#1e2a4a;font-size:28px;font-weight:700;margin:0;letter-spacing:-0.5px;">Your Courage Archetypes</h1>
+              <h1 style="color:#1e2a4a;font-size:28px;font-weight:700;margin:0;letter-spacing:-0.5px;">Your Courage Profile</h1>
             </td>
           </tr>
 
