@@ -162,7 +162,7 @@ const ResultsPage = ({ results, firstName, onRetake, resultId }: ResultsPageProp
           YOUR COURAGE PROFILE
         </p>
         <h1 className="text-3xl sm:text-4xl font-heading font-bold mb-2">
-          {firstName}, here's where your courage concentrates.
+          {firstName}, here's where your courage concentrates:
         </h1>
       </div>
 
