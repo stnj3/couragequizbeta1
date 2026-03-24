@@ -37,7 +37,7 @@ const LandingPage = ({ onBegin }: { onBegin: () => void }) => {
           Discover Your<br />Courage Archetypes
         </h1>
 
-        <p className="text-lg sm:text-xl text-primary font-heading font-semibold max-w-[520px] mx-auto text-left">
+        <p className="text-lg sm:text-xl text-primary font-heading font-semibold max-w-[520px] mx-auto text-center">
           A 5-minute assessment that reveals<br />how your courage actually works.
         </p>
 
