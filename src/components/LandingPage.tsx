@@ -38,7 +38,7 @@ const LandingPage = ({ onBegin }: { onBegin: () => void }) => {
         </h1>
 
         <p className="text-lg sm:text-xl text-primary font-heading font-semibold max-w-[520px] mx-auto text-left">
-          A 5-minute assessment that reveals how your courage actually works.
+          A 5-minute assessment that reveals<br />how your courage actually works.
         </p>
 
         <p className="text-base sm:text-lg leading-relaxed max-w-[520px] mx-auto text-left" style={{ color: "hsl(220 15% 68%)" }}>
