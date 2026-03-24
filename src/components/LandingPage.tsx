@@ -38,11 +38,11 @@ const LandingPage = ({ onBegin }: { onBegin: () => void }) => {
         </h1>
 
         <p className="text-lg sm:text-xl text-primary font-heading font-semibold">
-          A 5 minute quiz that reveals which types of courage come most naturally to you.
+          A 5-minute assessment that reveals how your courage actually works.
         </p>
 
         <p className="text-base sm:text-lg leading-relaxed max-w-md mx-auto" style={{ color: "hsl(220 15% 68%)" }}>
-          Courage drives how you decide, speak up, and act when the outcome isn't guaranteed. This 5-minute assessment reveals your primary Courage Archetypes, giving you clear insight into how you navigate uncertainty and where you're most effective. Understand your pattern. Move with intention.
+          Find your primary Courage Archetypes, learn what they mean for how you make decisions under uncertainty, and know what to watch for when the pressure is on.
         </p>
 
         <button

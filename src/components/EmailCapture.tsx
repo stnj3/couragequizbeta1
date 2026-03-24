@@ -37,14 +37,12 @@ const EmailCapture = ({ onSubmit }: EmailCaptureProps) => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-6 py-12 animate-fade-in-up">
       <div className="max-w-md w-full text-center space-y-6">
-        <div className="text-5xl mb-2">✨</div>
-
         <h2 className="text-3xl sm:text-4xl font-heading font-bold">
           Your results are ready.
         </h2>
 
         <p className="text-muted-foreground font-body text-base">
-          Enter your name and email to see your Courage Archetypes.
+          Enter your name and email to see your Courage Archetypes. We'll also send a copy to your inbox.
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4 text-left mt-8">
