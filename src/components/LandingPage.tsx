@@ -41,7 +41,7 @@ const LandingPage = ({ onBegin }: { onBegin: () => void }) => {
           A 5-minute assessment that reveals how your courage actually works.
         </p>
 
-        <p className="text-base sm:text-lg leading-relaxed max-w-md mx-auto" style={{ color: "hsl(220 15% 68%)" }}>
+        <p className="text-base sm:text-lg leading-relaxed max-w-[520px] mx-auto text-left" style={{ color: "hsl(220 15% 68%)" }}>
           Find your primary Courage Archetypes, learn what they mean for how you make decisions under uncertainty, and know what to watch for when the pressure is on.
         </p>
 
