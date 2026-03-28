@@ -46,11 +46,6 @@ const LandingPage = ({ onBegin }: { onBegin: () => void }) => {
           Begin the Quiz
         </button>
 
-        {count !== null && (
-          <p className="text-sm font-body" style={{ color: "hsl(40 55% 58% / 0.85)" }}>
-            Join {count.toLocaleString()} people who've discovered their Courage Archetypes.
-          </p>
-        )}
 
         <p className="text-xs pt-4" style={{ color: "hsl(220 15% 50%)" }}>
           © 2026 Courage Profile. All rights reserved.
