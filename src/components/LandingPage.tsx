@@ -2,19 +2,6 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
 const LandingPage = ({ onBegin }: { onBegin: () => void }) => {
-  const [count, setCount] = useState<number | null>(null);
-
-  useEffect(() => {
-    supabase
-      .from("quiz_submissions")
-      .select("id", { count: "exact", head: true })
-      .then(({ count: c }) => {
-        if (c !== null) {
-          const displayCount = 250 + (c * 3);
-          setCount(displayCount);
-        }
-      });
-  }, []);
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-6 py-12 animate-fade-in-up relative overflow-hidden"
