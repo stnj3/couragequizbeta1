@@ -253,7 +253,7 @@ serve(async (req) => {
         Authorization: `Bearer ${RESEND_API_KEY}`,
       },
       body: JSON.stringify({
-        from: "Courage Profile <assessment@courageprofile.com>",
+        from: "Courage Profile <quiz@courageprofile.com>",
         reply_to: "quiz@courageprofile.com",
         to: [email],
         subject: `${firstName}, your Courage Archetypes are ready`,
