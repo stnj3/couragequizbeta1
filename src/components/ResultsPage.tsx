@@ -277,7 +277,7 @@ const ResultsPage = ({ results, firstName, onRetake, resultId }: ResultsPageProp
           Courage is better together.
         </h3>
         <p className="text-center text-muted-foreground font-body text-base mb-10">
-          Send the quiz to someone you lead with, work with, or live with.
+          Send the assessment to someone you lead with, work with, or live with.
         </p>
 
         <div className="flex flex-wrap justify-center gap-3">

@@ -41,7 +41,7 @@ const SharedResults = () => {
           to="/"
           className="inline-flex items-center justify-center rounded-full bg-primary text-primary-foreground font-body font-semibold text-lg px-10 py-4 hover:opacity-90 transition-all"
         >
-          Take the Quiz
+          Take the Assessment
         </Link>
       </div>
     );
