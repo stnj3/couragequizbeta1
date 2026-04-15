@@ -42,7 +42,7 @@ const LandingPage = ({ onBegin }: { onBegin: () => void }) => {
             color: "hsl(0 0% 10%)",
           }}
         >
-          Begin the Quiz
+          Start Assessment
         </button>
 
 
