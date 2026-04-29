@@ -142,8 +142,8 @@ serve(async (req) => {
             <p style="color:#1e2a4a;font-size:13px;margin:0 0 4px 0;font-weight:${isTopTwo ? '600' : '400'};">${arch.emoji} ${arch.title}</p>
             <table width="100%" cellpadding="0" cellspacing="0" style="border-radius:4px;overflow:hidden;">
               <tr>
-                <td width="${barPercent}%" bgcolor="${barColor}" style="background-color:${barColor};height:12px;font-size:0;line-height:0;">&nbsp;</td>
-                <td width="${100 - barPercent}%" bgcolor="#e8e4de" style="background-color:#e8e4de;height:12px;font-size:0;line-height:0;"></td>
+                <td width="${barPercent}%" bgcolor="${barColor}" style="background-color:${barColor};border-bottom:12px solid ${barColor};height:0;font-size:0;line-height:0;">&nbsp;</td>
+                <td width="${100 - barPercent}%" bgcolor="#e8e4de" style="background-color:#e8e4de;border-bottom:12px solid #e8e4de;height:0;font-size:0;line-height:0;">&nbsp;</td>
               </tr>
             </table>
           </td>
