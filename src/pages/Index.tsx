@@ -15,6 +15,7 @@ const Index = () => {
   const [firstName, setFirstName] = useState("");
   const [resultId, setResultId] = useState<string | undefined>();
   const [quizKey, setQuizKey] = useState(0);
+  const [startedAt, setStartedAt] = useState<string | null>(null);
 
   const shuffledIndices = useMemo(() => {
     const indices = Array.from({ length: 36 }, (_, i) => i);
@@ -48,6 +49,7 @@ const Index = () => {
       categories: scored.categories,
       topTwo: scored.topTwo,
       timestamp: new Date().toISOString(),
+      startedAt: startedAt,
     };
 
     try {
@@ -70,6 +72,7 @@ const Index = () => {
     setResults(null);
     setResultId(undefined);
     setQuizKey(k => k + 1);
+    setStartedAt(null);
     setStep("quiz");
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -79,7 +82,12 @@ const Index = () => {
       <div className="grain-overlay" />
       <div className="relative z-10">
         {step === "landing" && (
-          <LandingPage onBegin={() => { console.log("Quiz started"); setStep("quiz"); window.scrollTo({ top: 0 }); }} />
+          <LandingPage onBegin={() => {
+            console.log("Quiz started");
+            setStartedAt(new Date().toISOString());
+            setStep("quiz");
+            window.scrollTo({ top: 0 });
+          }} />
         )}
         {step === "quiz" && (
           <QuizPage answers={answers} onAnswer={handleAnswer} onComplete={handleQuizComplete} shuffledIndices={shuffledIndices} />

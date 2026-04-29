@@ -9,6 +9,7 @@ export interface QuizSubmission {
   categories: Record<string, number>;
   topTwo: [string, number][];
   timestamp: string;
+  startedAt: string | null;
 }
 
 export async function sendToWebhook(data: QuizSubmission): Promise<string | null> {
@@ -20,6 +21,7 @@ export async function sendToWebhook(data: QuizSubmission): Promise<string | null
       raw_scores: data.categories,
       top_two_archetypes: data.topTwo.map(([name]) => name),
       answers: data.answers,
+      started_at: data.startedAt,
     }).select("result_id").single();
 
     if (error) {
