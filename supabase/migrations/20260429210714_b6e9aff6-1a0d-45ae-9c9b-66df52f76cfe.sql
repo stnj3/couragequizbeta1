@@ -1,0 +1,1 @@
+ALTER TABLE public.quiz_submissions ADD COLUMN started_at TIMESTAMP WITH TIME ZONE;

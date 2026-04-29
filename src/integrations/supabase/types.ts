@@ -24,6 +24,7 @@ export type Database = {
           purpose: string | null
           raw_scores: Json
           result_id: string
+          started_at: string | null
           top_two_archetypes: string[]
         }
         Insert: {
@@ -35,6 +36,7 @@ export type Database = {
           purpose?: string | null
           raw_scores: Json
           result_id?: string
+          started_at?: string | null
           top_two_archetypes: string[]
         }
         Update: {
@@ -46,6 +48,7 @@ export type Database = {
           purpose?: string | null
           raw_scores?: Json
           result_id?: string
+          started_at?: string | null
           top_two_archetypes?: string[]
         }
         Relationships: []
