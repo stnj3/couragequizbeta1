@@ -140,11 +140,10 @@ serve(async (req) => {
         <tr>
           <td style="padding:6px 0;">
             <p style="color:#1e2a4a;font-size:13px;margin:0 0 4px 0;font-weight:${isTopTwo ? '600' : '400'};">${arch.emoji} ${arch.title}</p>
-            <table width="100%" cellpadding="0" cellspacing="0">
+            <table width="100%" cellpadding="0" cellspacing="0" style="border-radius:4px;overflow:hidden;">
               <tr>
-                <td style="background-color:#e8e4de;border-radius:4px;">
-                  <div style="background-color:${barColor};height:12px;border-radius:4px;width:${barPercent}%;"></div>
-                </td>
+                <td width="${barPercent}%" bgcolor="${barColor}" style="background-color:${barColor};height:12px;font-size:0;line-height:0;">&nbsp;</td>
+                <td width="${100 - barPercent}%" bgcolor="#e8e4de" style="background-color:#e8e4de;height:12px;font-size:0;line-height:0;"></td>
               </tr>
             </table>
           </td>
