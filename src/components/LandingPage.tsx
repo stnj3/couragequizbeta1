@@ -28,7 +28,7 @@ const LandingPage = ({ onBegin }: { onBegin: () => void }) => {
         </p>
 
         <p className="text-base sm:text-lg leading-relaxed max-w-[520px] mx-auto text-left" style={{ color: "hsl(220 15% 68%)" }}>
-          Find your primary Courage Archetypes, learn what they mean for how you make decisions under uncertainty, and know what to watch for when the pressure is on.
+          Find your primary Courage Archetypes to reveal how you and the people around you actually move through uncertainty.
         </p>
 
         <button
